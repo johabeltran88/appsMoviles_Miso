@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"
+    tools:context=".ui.CollectorHomeActivity"
     android:screenOrientation="landscape">
 
     <ScrollView
@@ -19,16 +19,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:screenOrientation="landscape">
 
-            <TextView
-                android:id="@+id/textView"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50px"
-                android:text="VinilApp"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:background="#03A9F4"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:titleTextColor="#FEFEFE" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -38,39 +39,51 @@
                 app:srcCompat="@drawable/img1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150px"
-                android:text="Ingresa como:"
+                android:layout_marginTop="75dp"
+                android:text="¿Qué quieres hacer hoy?"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/buttonVisitor"
+                android:id="@+id/btnAddArtist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150px"
+                android:layout_marginTop="75dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Visitante"
+                android:text="Agregar Artista"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
             <Button
-                android:id="@+id/buttonCollector"
-                android:onClick="goToCollectorHome"
+                android:id="@+id/btnAddAlbum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75px"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Coleccionista"
+                android:text="Agregar Álbum"
+                android:textColorHighlight="#2196F3"
+                android:textColorLink="#03A9F4" />
+
+            <Button
+                android:id="@+id/buttonGetAlbums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#03A9F4"
+                android:minWidth="200dp"
+                android:text="Ver  Álbumes"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
