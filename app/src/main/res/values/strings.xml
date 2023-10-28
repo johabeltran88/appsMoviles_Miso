@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Test</string>
+    <array name="recordLabel">
+        <item>Disquera</item>
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </array>
+    <array name="genre">
+        <item>Género</item>
+        <item>Classical</item>
+        <item>Salsa</item>
+        <item>Rock</item>
+        <item>Folk</item>
+    </array>
+</resources>
