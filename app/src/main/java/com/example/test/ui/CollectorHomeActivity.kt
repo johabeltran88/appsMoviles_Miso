@@ -1,8 +1,9 @@
 package com.example.test.ui
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
 import com.example.test.databinding.ActivityCollectorHomeBinding
 
 class CollectorHomeActivity : AppCompatActivity() {
@@ -20,6 +21,11 @@ class CollectorHomeActivity : AppCompatActivity() {
 
         binding.btnAddArtist.setOnClickListener{
             val intent = Intent(this, CollectorAddArtistActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnAddAlbum.setOnClickListener {
+            val intent = Intent(this, CollectorAddAlbumActivity::class.java)
             startActivity(intent)
         }
     }
