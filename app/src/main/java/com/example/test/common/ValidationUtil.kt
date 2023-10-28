@@ -10,7 +10,7 @@ fun validateDate(field: String?): String {
     if (field.isNullOrBlank())
         return "El campo es requerido y no debe estar vacio"
     if (!isDateValid(field))
-        return "El formato de la fecha ingresada debe ser dd/mm/aaaa"
+        return "El formato de la fecha ingresada debe ser mm/dd/aaaa"
     return ""
 }
 
@@ -44,7 +44,7 @@ fun isURLValid(url: String?): Boolean {
 }
 
 fun isDateValid(date: String?): Boolean {
-    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
     dateFormat.isLenient = false
     return try {
         val date = dateFormat.parse(date)
