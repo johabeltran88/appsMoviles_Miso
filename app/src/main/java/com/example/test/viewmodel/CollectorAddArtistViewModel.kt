@@ -9,8 +9,11 @@ import com.example.test.common.validateDate
 import com.example.test.common.validateValue
 import com.example.test.model.Artist
 import com.example.test.network.NetworkAdapterService
+import com.example.test.repository.ArtistRepository
 
 class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val artistRepository = ArtistRepository(application)
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
@@ -60,7 +63,7 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
                 description.value,
                 birthDate.value
             )
-            NetworkAdapterService.getInstance(getApplication()).createArtist(artist, {
+            artistRepository.create(artist, {
                 error.value = false
             }, {
                 error.value = true
