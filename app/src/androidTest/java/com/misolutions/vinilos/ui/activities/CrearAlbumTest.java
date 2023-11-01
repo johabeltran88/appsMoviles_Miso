@@ -30,17 +30,37 @@ public class CrearAlbumTest {
 
     @Test
     public void crearAlbumCollecctorTest() {
-        ViewInteraction collectorBtn = onView(allOf(withId(R.id.skipButton), withText("Skip"),isDisplayed()));
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"),isDisplayed()));
         collectorBtn.perform(click());
 
-        ViewInteraction loginBtn = onView(allOf(withId(R.id.show_login_button), withText("Login"),isDisplayed()));
-        loginBtn.perform(click());
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"),isDisplayed()));
+        addAlbum.perform(click());
 
-        ViewInteraction usernameTxt = onView(withId(R.id.username));
-        usernameTxt.perform(scrollTo(), replaceText("monbi202010@gmail.com"), closeSoftKeyboard());
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Lo mejor de Pastor Lopez"), closeSoftKeyboard());
 
-        ViewInteraction pwdTxt = onView(withId(R.id.password));
-        pwdTxt.perform(scrollTo(), replaceText("123456789MISO"), closeSoftKeyboard());
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
+
+        ViewInteraction lanzamiento = onView(withId(R.id.releaseDate));
+        lanzamiento.perform(scrollTo(), replaceText("12/15/1985"), closeSoftKeyboard());
+
+        onView(withId(R.id.genre)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Classical"))).perform(click());
+
+        onView(withId(R.id.recordLabel)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("EMI"))).perform(click());
+
+        ViewInteraction description = onView(withId(R.id.description));
+        description.perform(scrollTo(), replaceText("Los clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
+
+        ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit), withText("Agregar")));
+        confirmBtn.perform(scrollTo(), click());
+
+
+
+
+
 
         ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.login_btn), withText("Login")));
         confirmLoginBtn.perform(scrollTo(), click());
