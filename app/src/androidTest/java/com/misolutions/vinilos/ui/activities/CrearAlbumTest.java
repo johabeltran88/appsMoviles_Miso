@@ -62,5 +62,114 @@ public class CrearAlbumTest {
         ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit), withText("Agregar")));
         confirmBtn.perform(scrollTo(), click());
 
+        onView(withText("El album ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()))
+
+
+
     }
+
+    @Test
+    public void crearAlbumConNombreIncorrectoTest() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
+
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an incorrect album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText(""), closeSoftKeyboard());
+
+        // Enter an album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("El campo es requerido y no debe estar vacio")).inRoot(isDialog()).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void  crearAlbumURLvacia() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
+
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Los 14 cañonazos Bailables vol 25"), closeSoftKeyboard());
+
+        // Enter an incorrect album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText(""), closeSoftKeyboard());
+
+        ViewInteraction lanzamiento = onView(withId(R.id.releaseDate));
+        lanzamiento.perform(scrollTo(), replaceText("12/15/1985"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("La imagen es requerida y no debe estar vacia")).inRoot(isDialog()).check(matches(isDisplayed()));
+
+    }
+
+    @Test
+    public void  crearAlbumURLinvalida() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
+
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Los 14 cañonazos Bailables vol 25"), closeSoftKeyboard());
+
+        // Enter an incorrect album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("Esta no es una URL válida"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("La url ingresada no es valida")).inRoot(isDialog()).check(matches(isDisplayed()));
+
+    }
+
+    // Agregar una fecha vacia
+    @Test
+    public void  crearAlbumfechavacia() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
+
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Los 14 cañonazos Bailables vol 25"), closeSoftKeyboard());
+
+        // Enter an incorrect album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
+
+        //Ingresamos fecha vacia
+        ViewInteraction lanzamiento = onView(withId(R.id.releaseDate));
+        lanzamiento.perform(scrollTo(), replaceText(""), closeSoftKeyboard());
+
+        ViewInteraction description = onView(withId(R.id.description));
+        description.perform(scrollTo(), replaceText("Solo clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("El campo es requerido y no debe estar vacio")).inRoot(isDialog()).check(matches(isDisplayed()));
+
+    }
+
+
+
 }
