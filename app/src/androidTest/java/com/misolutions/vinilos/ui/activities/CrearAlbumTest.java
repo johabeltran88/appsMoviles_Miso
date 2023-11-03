@@ -19,6 +19,8 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -62,7 +64,7 @@ public class CrearAlbumTest {
         ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit), withText("Agregar")));
         confirmBtn.perform(scrollTo(), click());
 
-        onView(withText("El album ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()))
+        onView(withText("El album ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()));
 
 
 
@@ -87,7 +89,7 @@ public class CrearAlbumTest {
         imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
 
         // Check for the expected error message or behavior
-        onView(withText("El campo es requerido y no debe estar vacio")).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -112,7 +114,7 @@ public class CrearAlbumTest {
         lanzamiento.perform(scrollTo(), replaceText("12/15/1985"), closeSoftKeyboard());
 
         // Check for the expected error message or behavior
-        onView(withText("La imagen es requerida y no debe estar vacia")).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withText("La imagen es requerida y no debe estar vacia")).check(matches(isDisplayed()));
 
     }
 
@@ -135,7 +137,7 @@ public class CrearAlbumTest {
         imagenAlbum.perform(scrollTo(), replaceText("Esta no es una URL válida"), closeSoftKeyboard());
 
         // Check for the expected error message or behavior
-        onView(withText("La url ingresada no es valida")).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withText("La url ingresada no es valida")).check(matches(isDisplayed()));
 
     }
 
@@ -166,7 +168,7 @@ public class CrearAlbumTest {
         description.perform(scrollTo(), replaceText("Solo clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
 
         // Check for the expected error message or behavior
-        onView(withText("El campo es requerido y no debe estar vacio")).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(isDisplayed()));
 
     }
 
