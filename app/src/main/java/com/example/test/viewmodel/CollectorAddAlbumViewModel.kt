@@ -10,8 +10,11 @@ import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.model.Album
 import com.example.test.network.NetworkAdapterService
+import com.example.test.repository.AlbumRepository
 
 class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val albumRepository = AlbumRepository(application)
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
@@ -65,12 +68,24 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
     }
 
     fun addAlbum() {
-        validateName()
-        validateImage()
-        validateGenre()
-        validateRecordLabel()
-        validateReleaseDate()
-        validateDescription()
+        if (valid.value == true) {
+            validateName()
+        }
+        if (valid.value == true) {
+            validateImage()
+        }
+        if (valid.value == true) {
+            validateGenre()
+        }
+        if (valid.value == true) {
+            validateRecordLabel()
+        }
+        if (valid.value == true) {
+            validateReleaseDate()
+        }
+        if (valid.value == true) {
+            validateDescription()
+        }
         if (valid.value == true) {
             val album = Album(
                 null,
@@ -81,7 +96,7 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
                 genre.value,
                 recordLabel.value
             )
-            NetworkAdapterService.getInstance(getApplication()).createAlbum(album, {
+            albumRepository.create(album, {
                 error.value = false
             }, {
                 error.value = true
