@@ -205,7 +205,7 @@ public class CrearAlbumTest {
 
     // Agregar nombre de De Album de mas de 50 caracteres
     @Test
-    public void  crearAlbumNombreInvalido() {
+    public void  crearAlbumNombreMaximoCaracteres() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
