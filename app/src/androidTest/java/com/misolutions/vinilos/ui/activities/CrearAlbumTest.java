@@ -172,6 +172,66 @@ public class CrearAlbumTest {
 
     }
 
+    // Agregar una fecha invalida
+    @Test
+    public void  crearAlbumfechainvalida() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
 
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Los 14 cañonazos Bailables vol 25"), closeSoftKeyboard());
+
+        // Enter an incorrect album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
+
+        //Ingresamos fecha invalida
+        ViewInteraction lanzamiento = onView(withId(R.id.releaseDate));
+        lanzamiento.perform(scrollTo(), replaceText("15 de Diciembre De 1985"), closeSoftKeyboard());
+
+        ViewInteraction description = onView(withId(R.id.description));
+        description.perform(scrollTo(), replaceText("Solo clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("El formato de la fecha ingresada debe ser mm/dd/aaaa")).check(matches(isDisplayed()));
+
+    }
+
+    // Agregar nombre de De Album de mas de 50 caracteres
+    @Test
+    public void  crearAlbumNombreInvalido() {
+        // Click on the "Coleccionista" button
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        collectorBtn.perform(click());
+
+        // Click on the "Agregar Álbum" button
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        addAlbum.perform(click());
+
+        // Enter an album name
+        ViewInteraction albumNombre = onView(withId(R.id.name));
+        albumNombre.perform(scrollTo(), replaceText("Los 14 cañonazos Bailables vol 25 Los 14 cañonazos Bailables vol 25"), closeSoftKeyboard());
+
+        // Enter an incorrect album image URL
+        ViewInteraction imagenAlbum = onView(withId(R.id.image));
+        imagenAlbum.perform(scrollTo(), replaceText("https://i.scdn.co/image/ab67616d0000b2732813f4432008eca545c53626"), closeSoftKeyboard());
+
+        //Ingresamos fecha invalida
+        ViewInteraction lanzamiento = onView(withId(R.id.releaseDate));
+        lanzamiento.perform(scrollTo(), replaceText("12/15/1985"), closeSoftKeyboard());
+
+        ViewInteraction description = onView(withId(R.id.description));
+        description.perform(scrollTo(), replaceText("Solo clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
+
+        // Check for the expected error message or behavior
+        onView(withText("El campo es de maximo de 50 caracteres")).check(matches(isDisplayed()));
+
+    }
 
 }
