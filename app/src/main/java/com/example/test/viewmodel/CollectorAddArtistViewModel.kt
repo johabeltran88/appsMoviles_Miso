@@ -51,10 +51,20 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun addArtist() {
-        validateName()
-        validateImage()
-        validateDescription()
-        validateBirthDate()
+
+        if (valid.value == true) {
+            validateName()
+        }
+        if (valid.value == true) {
+            validateImage()
+        }
+        if (valid.value == true) {
+            validateDescription()
+        }
+        if (valid.value == true) {
+            validateBirthDate()
+        }
+
         if (valid.value == true) {
             val artist = Artist(
                 null,

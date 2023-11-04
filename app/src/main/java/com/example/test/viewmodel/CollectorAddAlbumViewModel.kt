@@ -68,12 +68,24 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
     }
 
     fun addAlbum() {
-        validateName()
-        validateImage()
-        validateGenre()
-        validateRecordLabel()
-        validateReleaseDate()
-        validateDescription()
+        if (valid.value == true) {
+            validateName()
+        }
+        if (valid.value == true) {
+            validateImage()
+        }
+        if (valid.value == true) {
+            validateGenre()
+        }
+        if (valid.value == true) {
+            validateRecordLabel()
+        }
+        if (valid.value == true) {
+            validateReleaseDate()
+        }
+        if (valid.value == true) {
+            validateDescription()
+        }
         if (valid.value == true) {
             val album = Album(
                 null,
