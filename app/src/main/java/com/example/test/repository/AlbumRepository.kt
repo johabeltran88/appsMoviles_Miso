@@ -23,5 +23,4 @@ class AlbumRepository(private val application: Application) {
         NetworkAdapterService.getInstance(application).getAlbums(onComplete, onError)
     }
 
-
 }
