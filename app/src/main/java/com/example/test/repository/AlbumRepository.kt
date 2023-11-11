@@ -16,4 +16,12 @@ class AlbumRepository(private val application: Application) {
         NetworkAdapterService.getInstance(application).createAlbum(album, onComplete, onError)
     }
 
+    fun getAll(
+        onComplete: (resp: List<Album>) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        NetworkAdapterService.getInstance(application).getAlbums(onComplete, onError)
+    }
+
+
 }
