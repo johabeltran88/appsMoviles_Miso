@@ -2,11 +2,10 @@ package com.example.test.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
-import com.example.test.databinding.ActivityCollectorListAlbumsBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.test.databinding.ActivityCollectorListAlbumsBinding
 import com.example.test.ui.adapters.AlbumAdapter
 import com.example.test.viewmodel.CollectorListAlbumViewModel
 
@@ -22,6 +21,7 @@ class CollectorListAlbums : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Initialize the adapter with an empty list
         albumAdapter = AlbumAdapter(emptyList()) // Initialize with an empty list

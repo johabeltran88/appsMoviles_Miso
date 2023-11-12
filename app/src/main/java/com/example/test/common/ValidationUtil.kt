@@ -1,8 +1,6 @@
 package com.example.test.common
 
 import android.util.Patterns
-import java.net.HttpURLConnection
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -37,10 +35,11 @@ fun validateImage(field: String?): String {
 }
 
 fun isURLValid(url: String?): Boolean {
-    if (!Patterns.WEB_URL.matcher(url).matches()) {
-        return false
-    }
-    return true
+    return Patterns.WEB_URL.matcher(url).matches()
+}
+
+fun isValidEmail(email: String?): Boolean {
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
 
 fun isDateValid(date: String?): Boolean {

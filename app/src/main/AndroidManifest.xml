@@ -15,12 +15,19 @@
         android:theme="@style/Theme.Test"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AddCommentToAlbumActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.AlbumDetailActivity" />
+        <activity
+            android:name=".ui.AlbumDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.CollectorHomeActivity" />
+        <activity
             android:name=".ui.CollectorListAlbums"
             android:exported="false"
             android:label="@string/title_activity_collector_list_albums"
-            android:theme="@style/Theme.Test"
-            android:parentActivityName=".ui.CollectorHomeActivity"/>
-
+            android:parentActivityName=".ui.CollectorHomeActivity"
+            android:theme="@style/Theme.Test" />
         <activity
             android:name=".ui.CollectorAddAlbumActivity"
             android:exported="false"

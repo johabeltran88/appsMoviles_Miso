@@ -10,6 +10,8 @@ import com.example.test.model.Album
 
 class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
+
+
     // ViewHolder class that holds references to the UI components for each list item
     class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.album_title)
@@ -25,6 +27,9 @@ class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<Album
     // Binds data to the views in the ViewHolder
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = albums[position]
+        holder.itemView.setOnClickListener {
+
+        }
         holder.nameTextView.text = album.name ?: "Unknown"
     }
 

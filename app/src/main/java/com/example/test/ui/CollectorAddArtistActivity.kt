@@ -113,7 +113,7 @@ class CollectorAddArtistActivity : AppCompatActivity() {
                     val builder = AlertDialog.Builder(binding.root.context)
                     builder.setTitle("Notificación")
                     builder.setMessage("Ha ocurrido un error, intentelo de nuevo")
-                    builder.setPositiveButton("Aceptar") { dialog, which ->
+                    builder.setPositiveButton("Aceptar") { dialog, _ ->
                         dialog.dismiss()
                     }
                     val dialog = builder.create()
@@ -127,7 +127,7 @@ class CollectorAddArtistActivity : AppCompatActivity() {
                     val builder = AlertDialog.Builder(binding.root.context)
                     builder.setTitle("Notificación")
                     builder.setMessage("El artista ha sido creado exitosamente")
-                    builder.setPositiveButton("Aceptar") { dialog, which ->
+                    builder.setPositiveButton("Aceptar") { dialog, _ ->
                         dialog.dismiss()
                         val intent =
                             Intent(binding.root.context, CollectorAddArtistActivity::class.java)

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.test.common.validateDate
 import com.example.test.common.validateValue
 import com.example.test.model.Artist
-import com.example.test.network.NetworkAdapterService
 import com.example.test.repository.ArtistRepository
 
 class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(application) {
