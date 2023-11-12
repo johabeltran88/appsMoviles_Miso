@@ -59,15 +59,8 @@ class CollectorListAlbums : AppCompatActivity() {
         viewModel.fetchAllAlbums()
 
 
-        val navController = findNavController(R.id.nav_host_fragment_content_collector_list_albums)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_collector_list_albums)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
 }
