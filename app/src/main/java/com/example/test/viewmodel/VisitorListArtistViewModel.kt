@@ -10,6 +10,7 @@ import com.example.test.repository.ArtistRepository
 
 class VisitorListArtistViewModel(application: Application) : AndroidViewModel(application) {
 
+    
     private val artistRepository = ArtistRepository(application)
 
     // LiveData to hold the list of artist.
