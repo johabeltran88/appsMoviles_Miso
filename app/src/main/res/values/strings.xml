@@ -15,4 +15,12 @@
         <item>Rock</item>
         <item>Folk</item>
     </array>
+    <array name="rating">
+        <item>Puntuación</item>
+        <item>Uno</item>
+        <item>Dos</item>
+        <item>Tres</item>
+        <item>Cuatro</item>
+        <item>Cinco</item>
+    </array>
 </resources>

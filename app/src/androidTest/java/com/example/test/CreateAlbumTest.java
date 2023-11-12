@@ -1,4 +1,4 @@
-package com.misolutions.vinilos.ui.activities;
+package com.example.test;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
@@ -6,8 +6,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.test.ui.MainActivity;
-import com.example.test.R;
-
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,16 +29,16 @@ import static org.hamcrest.Matchers.instanceOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CrearAlbumTest {
+public class CreateAlbumTest {
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
     public void crearAlbumCollecctorTest() {
-        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"),isDisplayed()));
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
 
-        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"),isDisplayed()));
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
         addAlbum.perform(click());
 
         ViewInteraction albumNombre = onView(withId(R.id.name));
@@ -65,7 +63,6 @@ public class CrearAlbumTest {
         confirmBtn.perform(scrollTo(), click());
 
         onView(withText("El album ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()));
-
 
 
     }
@@ -93,7 +90,7 @@ public class CrearAlbumTest {
     }
 
     @Test
-    public void  crearAlbumURLvacia() {
+    public void crearAlbumURLvacia() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
@@ -119,7 +116,7 @@ public class CrearAlbumTest {
     }
 
     @Test
-    public void  crearAlbumURLinvalida() {
+    public void crearAlbumURLinvalida() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
@@ -143,7 +140,7 @@ public class CrearAlbumTest {
 
     // Agregar una fecha vacia
     @Test
-    public void  crearAlbumfechavacia() {
+    public void crearAlbumfechavacia() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
@@ -174,7 +171,7 @@ public class CrearAlbumTest {
 
     // Agregar una fecha invalida
     @Test
-    public void  crearAlbumfechainvalida() {
+    public void crearAlbumfechainvalida() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
@@ -205,7 +202,7 @@ public class CrearAlbumTest {
 
     // Agregar nombre de De Album de mas de 50 caracteres
     @Test
-    public void  crearAlbumNombreMaximoCaracteres() {
+    public void crearAlbumNombreMaximoCaracteres() {
         // Click on the "Coleccionista" button
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
         collectorBtn.perform(click());
