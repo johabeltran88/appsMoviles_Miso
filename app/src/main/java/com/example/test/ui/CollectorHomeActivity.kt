@@ -18,10 +18,18 @@ class CollectorHomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // Set up the buttons
+        //Get Albums Activity start
+        binding.buttonGetAlbums.setOnClickListener {
+            startActivity(Intent(this, CollectorListAlbums::class.java))
+        }
+
+        // Add Artist Activity start
         binding.btnAddArtist.setOnClickListener {
             startActivity(Intent(this, CollectorAddArtistActivity::class.java))
         }
 
+        // Add Album Activity start
         binding.btnAddAlbum.setOnClickListener {
             startActivity(Intent(this, CollectorAddAlbumActivity::class.java))
         }
