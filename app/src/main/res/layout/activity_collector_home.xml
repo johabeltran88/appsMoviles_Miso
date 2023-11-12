@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.CollectorHomeActivity"
-    android:screenOrientation="landscape">
+    android:screenOrientation="landscape"
+    tools:context=".ui.CollectorHomeActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -16,11 +14,11 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
+            android:screenOrientation="landscape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:screenOrientation="landscape">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -72,11 +70,24 @@
                 android:textColorLink="#03A9F4" />
 
             <Button
+                android:id="@+id/btnAlbumDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#03A9F4"
+                android:minWidth="200dp"
+                android:text="Detalle Albúm"
+                android:textColorHighlight="#2196F3"
+                android:textColorLink="#03A9F4" />
+
+            <Button
                 android:id="@+id/buttonGetAlbums"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
                 android:text="Ver  Álbumes"
@@ -86,4 +97,4 @@
     </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.VisitorHomeActivity">
+    android:screenOrientation="landscape"
+    tools:context=".ui.AlbumDetailActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.test.viewmodel.AlbumDetailViewModel" />
+    </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
-            android:screenOrientation="landscape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,45 +36,26 @@
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="#FEFEFE" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="150px"
-                app:srcCompat="@drawable/img1" />
-
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:text="¿Qué quieres hacer hoy?"
+                android:layout_marginTop="25dp"
+                android:text="Detalle Albúm"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/btnListAlbum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75dp"
-                android:backgroundTint="#03A9F4"
-                android:minWidth="200dp"
-                android:text="Ver Álbum"
-                android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
-
-            <Button
-                android:id="@+id/btnListArtist"
+                android:id="@+id/btnAddComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Ver Artista"
+                android:text="Agregar Comentario"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

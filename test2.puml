@@ -1,0 +1,139 @@
+@startuml
+class com.example.test.ui.CollectorHomeActivity {
+- ActivityCollectorHomeBinding? _binding
+-  binding
++ void onCreate(Bundle?)
+}
+class com.example.test.repository.ArtistRepository {
++ void create(void,Artist,void,(resp: JSONObject) -> Unit,void,(error: VolleyError) -> Unit)
++ void null()
+}
+class com.example.test.repository.AlbumRepository {
++ void create(void,Album,void,(resp: JSONObject) -> Unit,void,(error: VolleyError) -> Unit)
++ void null()
+}
+class com.example.test.ui.CollectorAddArtistActivity {
+- ActivityCollectorAddArtistBinding? _binding
+-  binding
+- CollectorAddArtistViewModel viewModel
++ void onCreate(Bundle?)
+}
+class com.example.test.viewmodel.CollectorAddArtistViewModel$Factory {
++ T create(Class<T>)
+}
+class com.example.test.viewmodel.CollectorAddArtistViewModel {
+- ArtistRepository artistRepository
++  name
++  errorName
++  image
++  errorImage
++  description
++  errorDescription
++  birthDate
++  errorBirthDate
++  error
++  valid
++ void validateName()
++ void validateImage()
++ void validateDescription()
++ void validateBirthDate()
++ void addArtist()
+}
+class com.example.test.webservice.ArtistWebService$Companion {
++  RESOURCE
+}
+class com.example.test.webservice.ArtistWebService {
++ void create(void,Artist,void,Response.Listener<JSONObject>,void,Response.ErrorListener)
++ void null()
+- JSONObject toJSONObject(Artist)
+}
+class com.example.test.network.NetworkAdapterService$Companion {
+- NetworkAdapterService? instance
++ void getInstance(Context)
+}
+class com.example.test.network.NetworkAdapterService {
+- AlbumWebService albumWebService
+- ArtistWebService artistWebService
+- RequestQueue requestQueue
++ void getAlbums((resp: List<Album>) -> Unit,(error: VolleyError) -> Unit)
++ void createArtist(void,Artist,void,(resp: JSONObject) -> Unit,void,(error: VolleyError) -> Unit)
++ void null()
++ void createAlbum(void,Album,void,(resp: JSONObject) -> Unit,void,(error: VolleyError) -> Unit)
++ void null()
+}
+class com.example.test.model.Artist {
+}
+class com.example.test.viewmodel.CollectorAddAlbumViewModel$Factory {
++ T create(Class<T>)
+}
+class com.example.test.viewmodel.CollectorAddAlbumViewModel {
+- AlbumRepository albumRepository
++  name
++  errorName
++  image
++  errorImage
++  releaseDate
++  errorReleaseDate
++  genre
++  errorGenre
++  recordLabel
++  errorRecordLabel
++  description
++  errorDescription
++  error
++  valid
++ void validateName()
++ void validateImage()
++ void validateReleaseDate()
++ void validateGenre()
++ void validateRecordLabel()
++ void validateDescription()
++ void addAlbum()
+}
+class com.example.test.model.Album {
+}
+class com.example.test.ui.CollectorAddAlbumActivity {
+- ActivityCollectorAddAlbumBinding? _binding
+-  binding
+- CollectorAddAlbumViewModel viewModel
+- Boolean isFirstSelectionGenre
+- Boolean isFirstSelectionRecordLabel
++ void onCreate(Bundle?)
+}
+class com.example.test.common.GatewayUtil$Companion {
++  BASE_URL
+}
+class com.example.test.common.GatewayUtil {
+}
+class com.example.test.webservice.AlbumWebService$Companion {
++  RESOURCE
+}
+class com.example.test.webservice.AlbumWebService {
++ void getAll(void,Response.Listener<String>,void,Response.ErrorListener)
++ void null()
++ void create(void,Album,void,Response.Listener<JSONObject>,void,Response.ErrorListener)
++ void null()
+- JSONObject toJSONObject(Album)
+}
+class com.example.test.ui.MainActivity {
++ void onCreate(Bundle?)
++ void goToCollectorHome(View)
++ void goToVisitorHome(View)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.test.ui.CollectorHomeActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.test.ui.CollectorAddArtistActivity
+com.example.test.viewmodel.CollectorAddArtistViewModel +.. com.example.test.viewmodel.CollectorAddArtistViewModel$Factory
+com.example.test.viewmodel.ViewModelProvider.Factory <|.. com.example.test.viewmodel.CollectorAddArtistViewModel$Factory
+androidx.lifecycle.AndroidViewModel <|-- com.example.test.viewmodel.CollectorAddArtistViewModel
+com.example.test.webservice.ArtistWebService +.. com.example.test.webservice.ArtistWebService$Companion
+com.example.test.network.NetworkAdapterService +.. com.example.test.network.NetworkAdapterService$Companion
+com.example.test.viewmodel.CollectorAddAlbumViewModel +.. com.example.test.viewmodel.CollectorAddAlbumViewModel$Factory
+com.example.test.viewmodel.ViewModelProvider.Factory <|.. com.example.test.viewmodel.CollectorAddAlbumViewModel$Factory
+androidx.lifecycle.AndroidViewModel <|-- com.example.test.viewmodel.CollectorAddAlbumViewModel
+androidx.appcompat.app.AppCompatActivity <|-- com.example.test.ui.CollectorAddAlbumActivity
+com.example.test.common.GatewayUtil +.. com.example.test.common.GatewayUtil$Companion
+com.example.test.webservice.AlbumWebService +.. com.example.test.webservice.AlbumWebService$Companion
+androidx.appcompat.app.AppCompatActivity <|-- com.example.test.ui.MainActivity
+@enduml

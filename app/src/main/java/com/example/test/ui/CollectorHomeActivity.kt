@@ -1,9 +1,8 @@
 package com.example.test.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.test.databinding.ActivityCollectorHomeBinding
 
 class CollectorHomeActivity : AppCompatActivity() {
@@ -19,13 +18,25 @@ class CollectorHomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.btnAddArtist.setOnClickListener{
-            val intent = Intent(this, CollectorAddArtistActivity::class.java)
-            startActivity(intent)
+        // Set up the buttons
+        //Get Albums Activity start
+        binding.buttonGetAlbums.setOnClickListener {
+            startActivity(Intent(this, CollectorListAlbums::class.java))
         }
 
+        // Add Artist Activity start
+        binding.btnAddArtist.setOnClickListener {
+            startActivity(Intent(this, CollectorAddArtistActivity::class.java))
+        }
+
+        // Add Album Activity start
         binding.btnAddAlbum.setOnClickListener {
-            val intent = Intent(this, CollectorAddAlbumActivity::class.java)
+            startActivity(Intent(this, CollectorAddAlbumActivity::class.java))
+        }
+
+        binding.btnAlbumDetail.setOnClickListener {
+            val intent = Intent(this, AlbumDetailActivity::class.java)
+            intent.putExtra("albumId", 100)
             startActivity(intent)
         }
     }

@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class VinilAppTest {
+class CreateArtistTest {
     @get:Rule
     val mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
     @Test

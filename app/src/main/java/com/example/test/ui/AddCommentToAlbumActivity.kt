@@ -1,6 +1,5 @@
 package com.example.test.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,27 +8,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.test.common.validateSpinner
-import com.example.test.databinding.ActivityCollectorAddAlbumBinding
-import com.example.test.viewmodel.CollectorAddAlbumViewModel
+import com.example.test.databinding.ActivityAddCommentToAlbumBinding
+import com.example.test.viewmodel.AddCommentToAlbumViewModel
 
-class CollectorAddAlbumActivity : AppCompatActivity() {
+class AddCommentToAlbumActivity : AppCompatActivity() {
 
-    private var _binding: ActivityCollectorAddAlbumBinding? = null
+    private var _binding: ActivityAddCommentToAlbumBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: CollectorAddAlbumViewModel
-    private var isFirstSelectionGenre = true
-    private var isFirstSelectionRecordLabel = true
+    private lateinit var viewModel: AddCommentToAlbumViewModel
+    private var isFirstSelectionRating = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityCollectorAddAlbumBinding.inflate(layoutInflater)
+        _binding = ActivityAddCommentToAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel = ViewModelProvider(
-            this, CollectorAddAlbumViewModel.Factory(this.application)
-        )[CollectorAddAlbumViewModel::class.java]
+            this, AddCommentToAlbumViewModel.Factory(this.application)
+        )[AddCommentToAlbumViewModel::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -47,74 +45,38 @@ class CollectorAddAlbumActivity : AppCompatActivity() {
                 viewModel.validateName()
         }
 
-        viewModel.image.observe(this) {
+        viewModel.email.observe(this) {
             it.apply {
-                viewModel.validateImage()
+                viewModel.validateEmail()
             }
         }
 
-        binding.image.setOnFocusChangeListener { _, hasFocus ->
+        binding.email.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateImage()
+                viewModel.validateEmail()
         }
 
-        viewModel.genre.observe(this) {
+        viewModel.rating.observe(this) {
             it.apply {
-                viewModel.errorGenre.value = validateSpinner(viewModel.genre.value, "Género")
+                viewModel.errorRating.value = validateSpinner(viewModel.rating.value, "Puntuación")
             }
         }
 
-        binding.genre.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.rating.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                if (isFirstSelectionGenre) {
-                    isFirstSelectionGenre = false
+                if (isFirstSelectionRating) {
+                    isFirstSelectionRating = false
                     return
                 }
-                viewModel.genre.value = binding.genre.selectedItem.toString()
+                viewModel.rating.value = binding.rating.selectedItemPosition.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        viewModel.recordLabel.observe(this) {
-            it.apply {
-                viewModel.errorRecordLabel.value =
-                    validateSpinner(viewModel.recordLabel.value, "Disquera")
-            }
-        }
-
-        binding.recordLabel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (isFirstSelectionRecordLabel) {
-                    isFirstSelectionRecordLabel = false
-                    return
-                }
-                viewModel.recordLabel.value = binding.recordLabel.selectedItem.toString()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
-
-        viewModel.releaseDate.observe(this) {
-            it.apply {
-                viewModel.validateReleaseDate()
-            }
-        }
-
-        binding.releaseDate.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus)
-                viewModel.validateReleaseDate()
         }
 
         viewModel.description.observe(this) {
@@ -129,7 +91,7 @@ class CollectorAddAlbumActivity : AppCompatActivity() {
         }
 
         binding.btnSubmit.setOnClickListener {
-            viewModel.addAlbum()
+            viewModel.addComment()
         }
 
         viewModel.errorName.observe(this) {
@@ -139,28 +101,21 @@ class CollectorAddAlbumActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.errorImage.observe(this) {
+        viewModel.errorEmail.observe(this) {
             it.apply {
                 if (!it.equals(""))
                     viewModel.valid.value = false
             }
         }
 
-        viewModel.errorGenre.observe(this) {
+        viewModel.errorTelephone.observe(this) {
             it.apply {
                 if (!it.equals(""))
                     viewModel.valid.value = false
             }
         }
 
-        viewModel.errorRecordLabel.observe(this) {
-            it.apply {
-                if (!it.equals(""))
-                    viewModel.valid.value = false
-            }
-        }
-
-        viewModel.errorReleaseDate.observe(this) {
+        viewModel.errorRating.observe(this) {
             it.apply {
                 if (!it.equals(""))
                     viewModel.valid.value = false
@@ -173,6 +128,8 @@ class CollectorAddAlbumActivity : AppCompatActivity() {
                     viewModel.valid.value = false
             }
         }
+
+        viewModel.albumId.value = this.intent.getIntExtra("albumId", 0)
 
         viewModel.error.observe(this) {
             it.apply {
@@ -193,12 +150,9 @@ class CollectorAddAlbumActivity : AppCompatActivity() {
                 } else {
                     val builder = AlertDialog.Builder(binding.root.context)
                     builder.setTitle("Notificación")
-                    builder.setMessage("El album ha sido creado exitosamente")
+                    builder.setMessage("El comentario ha sido agregado al albúm")
                     builder.setPositiveButton("Aceptar") { dialog, _ ->
                         dialog.dismiss()
-                        val intent =
-                            Intent(binding.root.context, CollectorAddAlbumActivity::class.java)
-                        startActivity(intent)
                         finish()
                     }
                     val dialog = builder.create()

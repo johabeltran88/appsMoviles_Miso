@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:screenOrientation="landscape"
-    tools:context=".ui.CollectorAddAlbumActivity">
+    tools:context=".ui.AddCommentToAlbumActivity">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.test.viewmodel.CollectorAddAlbumViewModel" />
+            type="com.example.test.viewmodel.AddCommentToAlbumViewModel" />
     </data>
 
     <ScrollView
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Agregar Álbum"
+                android:text="Agregar Comentario"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -53,7 +53,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Nombre"
+                android:hint="Nombre coleccionista"
                 android:inputType="text"
                 android:text="@={viewModel.name}" />
 
@@ -69,87 +69,67 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/image"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Imagen"
+                android:hint="Correo coleccionista"
                 android:inputType="text"
-                android:text="@={viewModel.image}" />
+                android:text="@={viewModel.email}" />
 
             <TextView
-                android:id="@+id/textViewErrorImage"
+                android:id="@+id/textViewErrorEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="@={viewModel.errorImage}"
+                android:text="@={viewModel.errorEmail}"
                 android:textAlignment="center"
                 android:textColor="#F32121"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/releaseDate"
+                android:id="@+id/telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Fecha lanzamiento"
+                android:hint="Teléfono coleccionista"
                 android:inputType="text"
-                android:text="@={viewModel.releaseDate}" />
+                android:text="@={viewModel.telephone}" />
 
             <TextView
-                android:id="@+id/textViewErrorBirthDate"
+                android:id="@+id/textViewErrorTelephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="@={viewModel.errorReleaseDate}"
+                android:text="@={viewModel.errorTelephone}"
                 android:textAlignment="center"
                 android:textColor="#F32121"
                 android:textSize="14sp" />
 
             <Spinner
-                android:id="@+id/genre"
+                android:id="@+id/rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:entries="@array/genre" />
+                android:entries="@array/rating" />
 
             <TextView
-                android:id="@+id/textViewErrorGenre"
+                android:id="@+id/textViewErrorRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="@={viewModel.errorGenre}"
-                android:textAlignment="center"
-                android:textColor="#F32121"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:id="@+id/recordLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:entries="@array/recordLabel" />
-
-            <TextView
-                android:id="@+id/textViewErrorRecordLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="@={viewModel.errorRecordLabel}"
+                android:text="@={viewModel.errorRating}"
                 android:textAlignment="center"
                 android:textColor="#F32121"
                 android:textSize="14sp" />
