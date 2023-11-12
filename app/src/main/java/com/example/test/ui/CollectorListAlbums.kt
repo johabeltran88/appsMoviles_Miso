@@ -21,6 +21,7 @@ import com.example.test.common.validateImage
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.databinding.ActivityCollectorAddAlbumBinding
+import com.example.test.ui.adapters.AlbumAdapter
 import com.example.test.viewmodel.CollectorAddAlbumViewModel
 
 class CollectorListAlbums : AppCompatActivity() {
