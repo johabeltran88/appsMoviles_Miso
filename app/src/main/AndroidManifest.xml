@@ -18,7 +18,9 @@
             android:name=".ui.CollectorListAlbums"
             android:exported="false"
             android:label="@string/title_activity_collector_list_albums"
-            android:theme="@style/Theme.Test" />
+            android:theme="@style/Theme.Test"
+            android:parentActivityName=".ui.CollectorHomeActivity"/>
+
         <activity
             android:name=".ui.CollectorAddAlbumActivity"
             android:exported="false"
