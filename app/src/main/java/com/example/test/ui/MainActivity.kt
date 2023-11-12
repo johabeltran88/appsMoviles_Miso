@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToVisitorHome(view: View) {
+        val intent = Intent(this, VisitorHomeActivity::class.java)
+        startActivity(intent)
     }
 
 }
