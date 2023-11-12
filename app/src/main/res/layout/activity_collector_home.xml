@@ -70,18 +70,6 @@
                 android:textColorLink="#03A9F4" />
 
             <Button
-                android:id="@+id/btnAlbumDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#03A9F4"
-                android:minWidth="200dp"
-                android:text="Detalle Albúm"
-                android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
-
-            <Button
                 android:id="@+id/buttonGetAlbums"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
