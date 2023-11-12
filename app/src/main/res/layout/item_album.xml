@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:gravity="center_vertical"
-        android:text="Album Title" <!-- This is placeholder text and will be replaced with data at runtime -->
+        android:text="Album Title" 
         android:paddingStart="8dp"
         android:paddingEnd="8dp" />
 </LinearLayout>

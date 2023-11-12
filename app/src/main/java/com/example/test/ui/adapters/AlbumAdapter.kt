@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test.R
 import com.example.test.model.Album
 
-class AlbumAdapter(private val albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
+class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
     // ViewHolder class that holds references to the UI components for each list item
     class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,6 +27,11 @@ class AlbumAdapter(private val albums: List<Album>) : RecyclerView.Adapter<Album
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = albums[position]
         holder.nameTextView.text = album.name ?: "Unknown"
+    }
+
+    fun updateAlbums(newAlbums: List<Album>) {
+        albums = newAlbums
+        notifyDataSetChanged() // Notify the adapter to refresh the views
     }
 
     // Returns the size of the dataset
