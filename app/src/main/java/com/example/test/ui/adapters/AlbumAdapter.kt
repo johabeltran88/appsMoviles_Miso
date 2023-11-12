@@ -28,9 +28,19 @@ class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<Album
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = albums[position]
         holder.itemView.setOnClickListener {
-
+            onItemClick(position)
         }
         holder.nameTextView.text = album.name ?: "Unknown"
+    }
+
+    private var onItemClickListener: ((Int) -> Unit)? = null
+
+    private fun onItemClick(position: Int) {
+        onItemClickListener?.invoke(position)
+    }
+
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun updateAlbums(newAlbums: List<Album>) {
