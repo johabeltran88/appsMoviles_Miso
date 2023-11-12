@@ -33,12 +33,6 @@ class CollectorHomeActivity : AppCompatActivity() {
         binding.btnAddAlbum.setOnClickListener {
             startActivity(Intent(this, CollectorAddAlbumActivity::class.java))
         }
-
-        binding.btnAlbumDetail.setOnClickListener {
-            val intent = Intent(this, AlbumDetailActivity::class.java)
-            intent.putExtra("albumId", 100)
-            startActivity(intent)
-        }
     }
 
 }

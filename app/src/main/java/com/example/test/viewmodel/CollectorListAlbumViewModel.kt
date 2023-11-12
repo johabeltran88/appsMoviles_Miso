@@ -25,6 +25,8 @@ class CollectorListAlbumViewModel(application: Application) : AndroidViewModel(a
     // LiveData to hold any error state.
     val error = MutableLiveData<String>()
 
+    val albumId = MutableLiveData<Int>()
+
     // Function to fetch all albums and post the value to the LiveData.
     fun fetchAllAlbums() {
         albumRepository.getAll(

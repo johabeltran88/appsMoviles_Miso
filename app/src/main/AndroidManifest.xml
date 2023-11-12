@@ -21,13 +21,11 @@
         <activity
             android:name=".ui.AlbumDetailActivity"
             android:exported="false"
-            android:parentActivityName=".ui.CollectorHomeActivity" />
+            android:parentActivityName=".ui.CollectorListAlbums" />
         <activity
             android:name=".ui.CollectorListAlbums"
             android:exported="false"
-            android:label="@string/title_activity_collector_list_albums"
-            android:parentActivityName=".ui.CollectorHomeActivity"
-            android:theme="@style/Theme.Test" />
+            android:parentActivityName=".ui.CollectorHomeActivity" />
         <activity
             android:name=".ui.CollectorAddAlbumActivity"
             android:exported="false"
