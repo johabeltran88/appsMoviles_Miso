@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:screenOrientation="landscape"
-    tools:context=".ui.MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.VisitorHomeActivity">
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tools:ignore="MissingConstraints">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:screenOrientation="landscape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50px"
-                android:text="VinilApp"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:background="#03A9F4"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:titleTextColor="#FEFEFE" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -36,40 +37,37 @@
                 app:srcCompat="@drawable/img1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150px"
-                android:text="Ingresa como:"
+                android:layout_marginTop="75dp"
+                android:text="¿Qué quieres hacer hoy?"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/buttonVisitor"
-                android:onClick="goToVisitorHome"
+                android:id="@+id/btnListAlbum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150px"
+                android:layout_marginTop="75dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Visitante"
+                android:text="Ver Álbum"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
             <Button
-                android:id="@+id/buttonCollector"
+                android:id="@+id/btnListArtist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75px"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:onClick="goToCollectorHome"
-                android:text="Coleccionista"
+                android:text="Ver Artista"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>
     </ScrollView>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
