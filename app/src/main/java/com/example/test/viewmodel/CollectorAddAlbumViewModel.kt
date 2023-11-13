@@ -9,7 +9,6 @@ import com.example.test.common.validateDate
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.model.Album
-import com.example.test.network.NetworkAdapterService
 import com.example.test.repository.AlbumRepository
 
 class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(application) {

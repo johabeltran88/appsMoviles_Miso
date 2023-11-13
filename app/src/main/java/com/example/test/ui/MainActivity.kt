@@ -14,11 +14,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToCollectorHome(view: View) {
-        val intent = Intent(this, CollectorHomeActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, CollectorHomeActivity::class.java))
     }
 
     fun goToVisitorHome(view: View) {
+        val intent = Intent(this, VisitorHomeActivity::class.java)
+        startActivity(intent)
     }
 
 }
