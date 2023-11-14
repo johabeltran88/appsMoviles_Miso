@@ -78,7 +78,7 @@
                 android:layout_marginBottom="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Ver  Álbumes"
+                android:text="Ver Álbumes"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>
