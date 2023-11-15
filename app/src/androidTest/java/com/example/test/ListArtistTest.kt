@@ -51,7 +51,7 @@ class ListArtistTest {
     }
 
     @Test
-    fun listArtistCreatedSuccess() {
+    fun listArtistAfterCreatedSuccess() {
         val name =  Faker().name().fullName()
         onView(withId(R.id.buttonCollector)).perform(
             ViewActions.scrollTo(),
@@ -67,7 +67,7 @@ class ListArtistTest {
         )
         onView(withId(R.id.image)).perform(
             ViewActions.scrollTo(),
-            ViewActions.typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+            ViewActions.typeText(Faker().internet().image())
         )
         onView(withId(R.id.birthDate)).perform(
             ViewActions.scrollTo(),
@@ -75,7 +75,7 @@ class ListArtistTest {
         )
         onView(withId(R.id.description)).perform(
             ViewActions.scrollTo(),
-            ViewActions.typeText("$name  was an important Jamaican singer")
+            ViewActions.typeText(Faker().yoda().quote())
         )
         onView(withId(R.id.btnSubmit)).perform(
             ViewActions.scrollTo(),

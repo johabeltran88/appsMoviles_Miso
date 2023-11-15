@@ -52,6 +52,7 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
+            list.sortBy { artist -> artist.name }
             onComplete(list)
         }, {
             onError(it)
@@ -76,6 +77,7 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
+            list.sortBy { album -> album.name }
             onComplete(list)
         }, {
             onError(it)
