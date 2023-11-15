@@ -37,9 +37,9 @@ public class ListAlbumTest {
         ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), isDisplayed()));
         collectorBtn.perform(click());
 
-        //ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
-        //listarAlbumBtn.perform(scrollTo(), click());
+        ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
+        listarAlbumBtn.perform(scrollTo(), click());
 
-        //onView(withId(R.id.textView5)).check(matches(withText("Listado de álbumes")));
+        onView(withId(R.id.textView5)).check(matches(withText("Listado de álbumes")));
     }
 }
