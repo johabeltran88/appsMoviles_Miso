@@ -29,8 +29,7 @@ class VisitorListAlbumViewModel(application: Application) : AndroidViewModel(app
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    var data = albumRepository.getAll()
-                    albums.postValue(data)
+                    albums.postValue(albumRepository.getAll())
                 }
             }
         } catch (exception: Exception) {

@@ -28,8 +28,7 @@ class VisitorListArtistViewModel(application: Application) : AndroidViewModel(ap
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    var data = artistRepository.getAll()
-                    artists.postValue(data)
+                    artists.postValue(artistRepository.getAll())
                 }
             }
         } catch (exception: Exception) {

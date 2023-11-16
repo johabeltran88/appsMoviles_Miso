@@ -1,7 +1,6 @@
 package com.example.test.network
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
@@ -45,7 +44,6 @@ class NetworkAdapterService constructor(context: Context) {
             var item: JSONObject?
             for (i in 0 until resp.length()) {
                 item = resp.getJSONObject(i)
-                Log.d("Response", item.toString())
                 artists.add(
                     i, Artist(
                         id = item.getInt("id"),

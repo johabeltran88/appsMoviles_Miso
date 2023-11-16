@@ -29,8 +29,7 @@ class CollectorListAlbumViewModel(application: Application) : AndroidViewModel(a
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    var data = albumRepository.getAll()
-                    albums.postValue(data)
+                    albums.postValue(albumRepository.getAll())
                 }
             }
         } catch (exception: Exception) {

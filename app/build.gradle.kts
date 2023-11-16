@@ -64,6 +64,6 @@ dependencies {
     implementation("com.github.javafaker:javafaker:1.0.2")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 }
