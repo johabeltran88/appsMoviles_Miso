@@ -12,7 +12,7 @@ import com.example.test.viewmodel.VisitorListArtistViewModel
 class VisitorListArtistActivity : AppCompatActivity() {
 
     private var _binding: ActivityVisitorListArtistBinding? = null
-    private lateinit var artistAdapter: ArtistAdapter // Declare the adapter
+    lateinit var artistAdapter: ArtistAdapter // Declare the adapter
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
