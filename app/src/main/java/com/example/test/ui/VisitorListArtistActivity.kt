@@ -32,10 +32,10 @@ class VisitorListArtistActivity : AppCompatActivity() {
         // Initialize your ViewModel here (assuming you have a ViewModel set up)
         val viewModel = ViewModelProvider(this).get(VisitorListArtistViewModel::class.java)
         // Observe the album data from the ViewModel
-        viewModel.artists.observe(this, Observer { artists ->
+        viewModel.artists.observe(this) { artists ->
             // When album data changes, update the adapter's dataset
             artistAdapter.updateArtists(artists)
-        })
+        }
 
         // Fetch the albums
         viewModel.fetchAllArtists()

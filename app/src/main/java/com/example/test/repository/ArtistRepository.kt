@@ -2,7 +2,6 @@ package com.example.test.repository
 
 import android.app.Application
 import com.android.volley.VolleyError
-import com.example.test.model.Album
 import com.example.test.model.Artist
 import com.example.test.network.NetworkAdapterService
 import org.json.JSONObject
