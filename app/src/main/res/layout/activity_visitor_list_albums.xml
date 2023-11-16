@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CollectorHomeActivity">
+    tools:context=".ui.VisitorHomeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,25 +30,23 @@
                 app:titleTextColor="#FEFEFE" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="64dp"
+                tools:layout_editor_absoluteX="400dp"
+                tools:layout_editor_absoluteY="65dp"
                 android:text="Listado de álbumes"
                 android:textAlignment="center"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_albums"
-                android:layout_width="413dp"
-                android:layout_height="565dp"
+                android:layout_width="403dp"
+                android:layout_height="529dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:layout_constraintVertical_bias="1.0"
                 tools:listitem="@layout/album_item" />
         </LinearLayout>
     </ScrollView>
