@@ -20,5 +20,10 @@ class VisitorHomeActivity : AppCompatActivity() {
             val intent = Intent(this, VisitorListArtistActivity::class.java)
             startActivity(intent)
         }
+
+        //Get Albums Activity start
+        binding.btnListAlbum.setOnClickListener {
+            startActivity(Intent(this, CollectorListAlbums::class.java))
+        }
     }
 }

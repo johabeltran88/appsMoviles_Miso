@@ -33,7 +33,10 @@ class NetworkAdapterService constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getArtists(onComplete: (resp: List<Artist>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun getArtists(
+        onComplete: (resp: List<Artist>) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(artistWebService.getAll({ response ->
             val resp = JSONArray(response)
             val list = mutableListOf<Artist>()
@@ -49,6 +52,7 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
+            list.sortBy { artist -> artist.name }
             onComplete(list)
         }, {
             onError(it)
@@ -73,6 +77,7 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
+            list.sortBy { album -> album.name }
             onComplete(list)
         }, {
             onError(it)
