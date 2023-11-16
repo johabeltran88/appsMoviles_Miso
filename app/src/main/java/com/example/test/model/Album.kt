@@ -3,7 +3,7 @@ package com.example.test.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "albums_table")
+@Entity(tableName = "albums")
 data class Album(
     @PrimaryKey val id: Int?,
     val name:String?,

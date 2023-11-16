@@ -75,7 +75,7 @@ class ListArtistTest {
         )
         onView(withId(R.id.description)).perform(
             ViewActions.scrollTo(),
-            ViewActions.typeText(Faker().yoda().quote())
+            ViewActions.typeText(Faker().lorem().sentence(15))
         )
         onView(withId(R.id.btnSubmit)).perform(
             ViewActions.scrollTo(),

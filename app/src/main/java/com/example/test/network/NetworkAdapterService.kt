@@ -2,7 +2,6 @@ package com.example.test.network
 
 import android.content.Context
 import com.android.volley.RequestQueue
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import com.example.test.model.Album
 import com.example.test.model.Artist
@@ -87,59 +86,68 @@ class NetworkAdapterService constructor(context: Context) {
         }))
     }
 
-    fun createArtist(
-        artist: Artist,
-        onComplete: (resp: JSONObject) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
+    suspend fun createArtist(artist: Artist) = suspendCoroutine { continuation ->
         requestQueue.add(artistWebService.create(artist, { response ->
-            onComplete(response)
-        }, {
-            onError(it)
-        }))
-    }
-
-    fun createAlbum(
-        album: Album,
-        onComplete: (resp: JSONObject) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        requestQueue.add(albumWebService.create(album, { response ->
-            onComplete(response)
-        }, {
-            onError(it)
-        }))
-    }
-
-    fun createCollector(
-        collector: Collector,
-        onComplete: (resp: Collector) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        requestQueue.add(collectorWebService.create(collector, { response ->
-            onComplete(
-                Collector(
+            continuation.resume(
+                Artist(
                     id = response.getInt("id"),
                     name = response.getString("name"),
-                    telephone = response.getString("telephone"),
-                    email = response.getString("email")
+                    image = response.getString("image"),
+                    description = response.getString("description"),
+                    birthDate = response.getString("birthDate")
                 )
             )
         }, {
-            onError(it)
+            continuation.resumeWithException(it)
         }))
     }
 
-    fun createComment(
-        albumId: Int?,
-        comment: Comment,
-        onComplete: (resp: JSONObject) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        requestQueue.add(commentWebService.create(albumId, comment, { response ->
-            onComplete(response)
+    suspend fun createAlbum(album: Album) = suspendCoroutine { continuation ->
+        requestQueue.add(albumWebService.create(album, { response ->
+            continuation.resume(
+                Album(
+                    id = response.getInt("id"),
+                    name = response.getString("name"),
+                    cover = response.getString("cover"),
+                    recordLabel = response.getString("recordLabel"),
+                    releaseDate = response.getString("releaseDate"),
+                    genre = response.getString("genre"),
+                    description = response.getString("description")
+                )
+            )
         }, {
-            onError(it)
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun createCollector(collector: Collector): Collector =
+        suspendCoroutine { continuation ->
+            requestQueue.add(collectorWebService.create(collector, { response ->
+                continuation.resume(
+                    Collector(
+                        id = response.getInt("id"),
+                        name = response.getString("name"),
+                        telephone = response.getString("telephone"),
+                        email = response.getString("email")
+                    )
+                )
+            }, {
+                continuation.resumeWithException(it)
+            }))
+        }
+
+    suspend fun createComment(albumId: Int?, comment: Comment) = suspendCoroutine { continuation ->
+        requestQueue.add(commentWebService.create(albumId, comment, { response ->
+            continuation.resume(
+                Comment(
+                    id = response.getInt("id"),
+                    description = response.getString("description"),
+                    rating = response.getInt("rating"),
+                    collector = comment.collector
+                )
+            )
+        }, {
+            continuation.resumeWithException(it)
         }))
     }
 

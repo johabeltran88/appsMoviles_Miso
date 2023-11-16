@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Album
 import com.example.test.repository.AlbumRepository
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,10 @@ import kotlinx.coroutines.withContext
 
 class CollectorListAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val albumRepository = AlbumRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).albumDao()
+    )
 
     // LiveData to hold the list of albums.
     val albums = MutableLiveData<List<Album>>()
