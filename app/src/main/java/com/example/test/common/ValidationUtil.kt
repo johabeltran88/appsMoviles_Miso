@@ -26,6 +26,12 @@ fun validateValue(field: String?, maxLength: Int): String {
     return ""
 }
 
+fun validateEmailValue(field: String?): String {
+    if (!isValidEmail(field))
+        return "Verifique el correo electronico"
+    return ""
+}
+
 fun validateImage(field: String?): String {
     if (field.isNullOrBlank())
         return "La imagen es requerida y no debe estar vacia"

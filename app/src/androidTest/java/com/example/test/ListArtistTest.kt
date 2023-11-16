@@ -105,7 +105,7 @@ class ListArtistTest {
         SystemClock.sleep(2000)
         val visitorListArtistActivity = getCurrentActivity<VisitorListArtistActivity>()
         SystemClock.sleep(2000)
-        var position = 0;
+        var position = 0
         for (artist in visitorListArtistActivity?.artistAdapter?.artists!!) {
             if (artist.name == name) {
                 break

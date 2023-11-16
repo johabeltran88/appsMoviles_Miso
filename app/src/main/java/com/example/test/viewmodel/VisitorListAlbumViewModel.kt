@@ -5,15 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
-import com.example.test.common.validateDate
-import com.example.test.common.validateSpinner
-import com.example.test.common.validateValue
 import com.example.test.model.Album
-import com.example.test.network.NetworkAdapterService
 import com.example.test.repository.AlbumRepository
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class VisitorListAlbumViewModel(application: Application) : AndroidViewModel(application) {
 

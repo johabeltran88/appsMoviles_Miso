@@ -51,12 +51,12 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
         errorReleaseDate.value = validateDate(releaseDate.value)
     }
 
-    fun validateGenre() {
+    private fun validateGenre() {
         valid.value = true
         errorGenre.value = validateSpinner(genre.value, "Género")
     }
 
-    fun validateRecordLabel() {
+    private fun validateRecordLabel() {
         valid.value = true
         errorRecordLabel.value = validateSpinner(recordLabel.value, "Disquera")
     }
