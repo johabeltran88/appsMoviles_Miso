@@ -53,7 +53,7 @@
                 android:layout_marginTop="75dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Ver Álbum"
+                android:text="Ver Álbumes"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
@@ -65,7 +65,7 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Ver Artista"
+                android:text="Ver Artistas"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>

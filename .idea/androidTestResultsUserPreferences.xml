@@ -17,13 +17,13 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
-        <entry key="-1476993187">
+        <entry key="-832233260">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
-                  <entry key="Pixel_3a_API_33_x86_64" value="120" />
+                  <entry key="Pixel_XL_API_33" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -45,7 +45,7 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
-        <entry key="-132133637">
+        <entry key="263610323">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
@@ -85,13 +85,39 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="1740830962">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1777572451">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="2062804737">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
-                  <entry key="Pixel_3a_API_33_x86_64" value="120" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                   <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
