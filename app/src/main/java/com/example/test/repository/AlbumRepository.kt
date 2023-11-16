@@ -19,7 +19,7 @@ class AlbumRepository(private val application: Application, private val albumDao
 
     suspend fun getAll(): List<Album> {
         val cached = albumDao.findAll()
-        return if (cached.isNullOrEmpty()) {
+        return if (cached.isEmpty()) {
             val connectivityManager =
                 application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkCapabilities =

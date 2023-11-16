@@ -18,7 +18,7 @@ class ArtistRepository(private val application: Application, private val artistD
 
     suspend fun getAll(): List<Artist> {
         val cached = artistDao.findAll()
-        return if (cached.isNullOrEmpty()) {
+        return if (cached.isEmpty()) {
             val connectivityManager =
                 application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkCapabilities =
