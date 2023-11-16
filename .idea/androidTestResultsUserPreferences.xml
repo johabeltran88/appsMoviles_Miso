@@ -30,6 +30,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-717426598">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-695524007">
           <value>
             <AndroidTestResultsTableState>
