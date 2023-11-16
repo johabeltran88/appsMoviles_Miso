@@ -15,6 +15,10 @@ import com.example.test.webservice.CollectorWebService
 import com.example.test.webservice.CommentWebService
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.Locale
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkAdapterService constructor(context: Context) {
 
@@ -34,18 +38,15 @@ class NetworkAdapterService constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getArtists(
-        onComplete: (resp: List<Artist>) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
+    suspend fun getArtists() = suspendCoroutine<List<Artist>> { continuation ->
         requestQueue.add(artistWebService.getAll({ response ->
+            val artists = mutableListOf<Artist>()
             val resp = JSONArray(response)
-            val list = mutableListOf<Artist>()
-            var item:JSONObject? = null
+            var item: JSONObject?
             for (i in 0 until resp.length()) {
                 item = resp.getJSONObject(i)
                 Log.d("Response", item.toString())
-                list.add(
+                artists.add(
                     i, Artist(
                         id = item.getInt("id"),
                         name = item.getString("name"),
@@ -55,21 +56,21 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
-            list.sortBy { artist -> artist.name }
-            onComplete(list)
+            artists.sortBy { artist -> artist.name?.lowercase(Locale.ROOT) }
+            continuation.resume(artists)
         }, {
-            onError(it)
+            continuation.resumeWithException(it)
         }))
     }
 
-    fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbums() = suspendCoroutine<List<Album>> { continuation ->
         requestQueue.add(albumWebService.getAll({ response ->
             val resp = JSONArray(response)
-            val list = mutableListOf<Album>()
-            var item:JSONObject? = null
+            val albums = mutableListOf<Album>()
+            var item: JSONObject?
             for (i in 0 until resp.length()) {
                 item = resp.getJSONObject(i)
-                list.add(
+                albums.add(
                     i, Album(
                         id = item.getInt("id"),
                         name = item.getString("name"),
@@ -81,10 +82,10 @@ class NetworkAdapterService constructor(context: Context) {
                     )
                 )
             }
-            list.sortBy { album -> album.name }
-            onComplete(list)
+            albums.sortBy { album -> album.name?.lowercase(Locale.ROOT) }
+            continuation.resume(albums)
         }, {
-            onError(it)
+            continuation.resumeWithException(it)
         }))
     }
 

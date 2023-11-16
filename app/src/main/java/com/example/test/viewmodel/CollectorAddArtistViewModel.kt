@@ -50,7 +50,6 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun addArtist() {
-
         if (valid.value == true) {
             validateName()
         }

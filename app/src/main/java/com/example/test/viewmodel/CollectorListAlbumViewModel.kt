@@ -5,8 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.test.model.Album
 import com.example.test.repository.AlbumRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CollectorListAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -22,16 +26,16 @@ class CollectorListAlbumViewModel(application: Application) : AndroidViewModel(a
 
     // Function to fetch all albums and post the value to the LiveData.
     fun fetchAllAlbums() {
-        albumRepository.getAll(
-            onComplete = { albumList ->
-                // Post the list of albums to the LiveData.
-                albums.postValue(albumList)
-            },
-            onError = { volleyError ->
-                // Post an error message to the LiveData.
-                error.postValue("Failed to fetch albums: ${volleyError.message}")
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    var data = albumRepository.getAll()
+                    albums.postValue(data)
+                }
             }
-        )
+        } catch (exception: Exception) {
+            error.postValue("Failed to fetch artists: ${exception.message}")
+        }
     }
 
     class Factory(private val application: Application) : ViewModelProvider.Factory {

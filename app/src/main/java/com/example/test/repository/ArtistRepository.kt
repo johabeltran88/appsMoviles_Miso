@@ -16,11 +16,8 @@ class ArtistRepository(private val application: Application) {
         NetworkAdapterService.getInstance(application).createArtist(artist, onComplete, onError)
     }
 
-    fun getAll(
-        onComplete: (resp: List<Artist>) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        NetworkAdapterService.getInstance(application).getArtists(onComplete, onError)
+    suspend fun getAll(): List<Artist> {
+        return NetworkAdapterService.getInstance(application).getArtists()
     }
 
 }
