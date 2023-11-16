@@ -34,7 +34,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
@@ -54,7 +54,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
@@ -72,7 +72,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
@@ -90,7 +90,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type image in the form
         onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
         //Collector Add Artist Activity - Type birth date in the form
@@ -108,7 +108,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type birth date in the form
@@ -126,7 +126,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
@@ -144,7 +144,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
@@ -161,7 +161,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
         //Collector Add Artist Activity - Type image in the form
@@ -180,7 +180,7 @@ class CreateArtistTest {
         //Main Activity - Click button collector
         onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
         //Collector Home Activity - Click button add artist
-        onView(withId(R.id.btnListAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
