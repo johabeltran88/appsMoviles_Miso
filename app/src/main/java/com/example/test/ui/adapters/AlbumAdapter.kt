@@ -1,5 +1,6 @@
 package com.example.test.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class AlbumAdapter(var albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.
         onItemClickListener = listener
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateAlbums(newAlbums: List<Album>) {
         albums = newAlbums
         notifyDataSetChanged() // Notify the adapter to refresh the views

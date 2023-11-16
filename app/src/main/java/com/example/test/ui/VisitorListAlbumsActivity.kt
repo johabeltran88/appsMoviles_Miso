@@ -12,7 +12,7 @@ import com.example.test.viewmodel.VisitorListAlbumViewModel
 class VisitorListAlbumsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVisitorListAlbumsBinding
-    lateinit var albumAdapter: AlbumAdapter // Declare the adapter
+    private lateinit var albumAdapter: AlbumAdapter // Declare the adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

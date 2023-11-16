@@ -1,5 +1,6 @@
 package com.example.test.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,7 @@ class ArtistAdapter(var artists: List<Artist>) : RecyclerView.Adapter<ArtistAdap
         holder.nameTextView.text = artist.name ?: "Unknown"
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateArtists(newArtists: List<Artist>) {
         artists = newArtists
         notifyDataSetChanged() // Notify the adapter to refresh the views

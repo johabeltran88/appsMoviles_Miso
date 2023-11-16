@@ -12,14 +12,13 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 
 import android.app.Activity;
 import android.os.SystemClock;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
@@ -35,12 +34,12 @@ import androidx.test.runner.lifecycle.Stage;
 import com.example.test.model.Album;
 import com.example.test.ui.CollectorListAlbums;
 import com.example.test.ui.MainActivity;
-import com.example.test.ui.VisitorListAlbumsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @LargeTest
@@ -57,7 +56,7 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
         listarAlbumBtn.perform(scrollTo(), click());
 
-        onView(withId(R.id.textView5)).check(matches(withText("Listado de álbumes")));
+        onView(withId(R.id.textView5)).check(matches(withText("Lista de Álbumes")));
     }
 
     @Test
@@ -68,7 +67,7 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.btnListAlbum), isDisplayed()));
         listarAlbumBtn.perform(click());
 
-        onView(withText("Listado de álbumes")).check(matches(isDisplayed()));
+        onView(withText("Lista de Álbumes")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -110,12 +109,12 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
         listarAlbumBtn.perform(scrollTo(), click());
 
-        CollectorListAlbums collectorListAlbumsActivity = (CollectorListAlbums)getCurrentActivity();
+        CollectorListAlbums collectorListAlbumsActivity = getCurrentActivity();
         SystemClock.sleep(2000);
 
         int position = 0;
         for (Album artist : collectorListAlbumsActivity.albumAdapter.getAlbums()) {
-            if (artist.getName().equals(nombre)) {
+            if (Objects.equals(artist.getName(), nombre)) {
                 break;
             }
             position += 1;
@@ -175,12 +174,12 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.btnListAlbum), isDisplayed()));
         listarAlbumBtn.perform(click());
 
-        CollectorListAlbums visitorListAlbumsActivity = (CollectorListAlbums)getCurrentActivity();
+        CollectorListAlbums visitorListAlbumsActivity = getCurrentActivity();
         SystemClock.sleep(2000);
 
         int position = 0;
         for (Album artist : visitorListAlbumsActivity.albumAdapter.getAlbums()) {
-            if (artist.getName().equals(nombre)) {
+            if (Objects.equals(artist.getName(), nombre)) {
                 break;
             }
             position += 1;
@@ -198,13 +197,10 @@ public class ListAlbumTest {
     private <T extends AppCompatActivity> T getCurrentActivity() {
         final Activity[] activity = new Activity[1];
 
-        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                Iterable<Activity> activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
-                if (activities != null) {
-                    activity[0] = activities.iterator().next();
-                }
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+            Iterable<Activity> activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+            if (activities != null) {
+                activity[0] = activities.iterator().next();
             }
         });
 
