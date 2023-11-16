@@ -1,6 +1,7 @@
 package com.example.test.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
@@ -37,8 +38,10 @@ class NetworkAdapterService constructor(context: Context) {
         requestQueue.add(artistWebService.getAll({ response ->
             val resp = JSONArray(response)
             val list = mutableListOf<Artist>()
+            var item:JSONObject? = null
             for (i in 0 until resp.length()) {
-                val item = resp.getJSONObject(i)
+                item = resp.getJSONObject(i)
+                Log.d("Response", item.toString())
                 list.add(
                     i, Artist(
                         id = item.getInt("id"),
@@ -61,8 +64,9 @@ class NetworkAdapterService constructor(context: Context) {
         requestQueue.add(albumWebService.getAll({ response ->
             val resp = JSONArray(response)
             val list = mutableListOf<Album>()
+            var item:JSONObject? = null
             for (i in 0 until resp.length()) {
-                val item = resp.getJSONObject(i)
+                item = resp.getJSONObject(i)
                 list.add(
                     i, Album(
                         id = item.getInt("id"),
