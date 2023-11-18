@@ -66,5 +66,207 @@ class CreateAlbumCommentTest {
         )
     }
 
-    
+    @Test
+    fun addAlbumCommentEmptyNameTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Uno")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
+    @Test
+    fun addAlbumCommentEmptyEmailTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Uno")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
+    @Test
+    fun addAlbumCommentWrongEmailTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText("test"))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Uno")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("El campo debe ser un correo valido")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
+    @Test
+    fun addAlbumCommentEmptyTelephoneTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Uno")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
+    @Test
+    fun addAlbumCommentEmptyDescriptionTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Uno")
+            )
+        ).perform(click())
+
+        onView(withId(R.id.description)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
+    @Test
+    fun addAlbumCommentEmptyRatingTest() {
+        //Main Activity - Click button collector
+        onView(withId(R.id.buttonCollector)).perform(scrollTo(), click())
+        //Collector Home Activity - Click button get albums
+        onView(withId(R.id.buttonGetAlbums)).perform(scrollTo(), click())
+        //Collector Get firts album
+        SystemClock.sleep(2000)
+        onView(withId(R.id.recycler_view_albums))
+            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
+        onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
+        onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
+        onView(withId(R.id.rating)).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(
+                    Matchers.instanceOf<Any>(
+                        String::class.java
+                    )
+                ), Matchers.`is`("Puntuación")
+            )
+        ).perform(click())
+        onView(withId(R.id.description)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        //Check if alert
+        onView(ViewMatchers.withText("Debe seleccionar un elemento de la lista")).check(
+            ViewAssertions.matches(ViewMatchers.isDisplayed())
+        )
+    }
+
 }

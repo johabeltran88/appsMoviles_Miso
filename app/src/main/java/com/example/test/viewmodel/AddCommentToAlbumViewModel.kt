@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.test.common.validateEmailValue
+import com.example.test.common.validateEmailValue
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.model.Collector
