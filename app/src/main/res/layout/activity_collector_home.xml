@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:screenOrientation="landscape"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,15 +33,16 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginTop="150px"
+                android:layout_marginTop="25dp"
+                android:contentDescription="@string/imagen"
                 app:srcCompat="@drawable/img1" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:text="¿Qué quieres hacer hoy?"
+                android:layout_marginTop="25dp"
+                android:text="@string/qu_quieres_hacer_hoy"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -50,10 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Agregar Artista"
+                android:text="@string/agregar_artista"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
@@ -65,7 +66,7 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Agregar Álbum"
+                android:text="@string/agregar_lbum"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
@@ -78,7 +79,7 @@
                 android:layout_marginBottom="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Ver  Álbumes"
+                android:text="@string/ver_lbumes"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>

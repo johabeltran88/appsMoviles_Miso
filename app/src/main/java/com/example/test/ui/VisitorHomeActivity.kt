@@ -17,8 +17,12 @@ class VisitorHomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnListArtist.setOnClickListener{
-            val intent = Intent(this, VisitorListArtistActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, VisitorListArtistActivity::class.java))
+        }
+
+        //Get Albums Activity start
+        binding.btnListAlbum.setOnClickListener {
+            startActivity(Intent(this, CollectorListAlbums::class.java))
         }
     }
 }

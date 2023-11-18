@@ -1,8 +1,7 @@
 package com.example.test.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test.databinding.ActivityVisitorListArtistBinding
@@ -12,7 +11,7 @@ import com.example.test.viewmodel.VisitorListArtistViewModel
 class VisitorListArtistActivity : AppCompatActivity() {
 
     private var _binding: ActivityVisitorListArtistBinding? = null
-    private lateinit var artistAdapter: ArtistAdapter // Declare the adapter
+    lateinit var artistAdapter: ArtistAdapter // Declare the adapter
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +29,12 @@ class VisitorListArtistActivity : AppCompatActivity() {
         binding.recyclerViewArtist.adapter = artistAdapter // Set the adapter
 
         // Initialize your ViewModel here (assuming you have a ViewModel set up)
-        val viewModel = ViewModelProvider(this).get(VisitorListArtistViewModel::class.java)
+        val viewModel = ViewModelProvider(this)[VisitorListArtistViewModel::class.java]
         // Observe the album data from the ViewModel
-        viewModel.artists.observe(this, Observer { artists ->
+        viewModel.artists.observe(this) { artists ->
             // When album data changes, update the adapter's dataset
             artistAdapter.updateArtists(artists)
-        })
+        }
 
         // Fetch the albums
         viewModel.fetchAllArtists()

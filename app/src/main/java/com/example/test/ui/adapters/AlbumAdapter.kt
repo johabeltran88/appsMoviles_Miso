@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.calculateDiff
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.R
 import com.example.test.model.Album
 
-class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
-
+class AlbumAdapter(var albums: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
 
     // ViewHolder class that holds references to the UI components for each list item
@@ -44,10 +45,27 @@ class AlbumAdapter(private var albums: List<Album>) : RecyclerView.Adapter<Album
     }
 
     fun updateAlbums(newAlbums: List<Album>) {
+        val diffResult = calculateDiff(DiffCallback(albums, newAlbums))
         albums = newAlbums
-        notifyDataSetChanged() // Notify the adapter to refresh the views
+        diffResult.dispatchUpdatesTo(this)
     }
 
     // Returns the size of the dataset
     override fun getItemCount() = albums.size
+
+    private class DiffCallback(
+        private val oldAlbums: List<Album>,
+        private val newAlbums: List<Album>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldAlbums.size
+        override fun getNewListSize() = newAlbums.size
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldAlbums[oldItemPosition].id == newAlbums[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldAlbums[oldItemPosition] == newAlbums[newItemPosition]
+        }
+    }
+
 }

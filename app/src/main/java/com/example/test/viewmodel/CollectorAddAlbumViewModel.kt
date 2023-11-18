@@ -5,15 +5,23 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.test.common.validateDate
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Album
 import com.example.test.repository.AlbumRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val albumRepository = AlbumRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).albumDao()
+    )
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
@@ -51,12 +59,12 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
         errorReleaseDate.value = validateDate(releaseDate.value)
     }
 
-    fun validateGenre() {
+    private fun validateGenre() {
         valid.value = true
         errorGenre.value = validateSpinner(genre.value, "Género")
     }
 
-    fun validateRecordLabel() {
+    private fun validateRecordLabel() {
         valid.value = true
         errorRecordLabel.value = validateSpinner(recordLabel.value, "Disquera")
     }
@@ -95,11 +103,16 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
                 genre.value,
                 recordLabel.value
             )
-            albumRepository.create(album, {
-                error.value = false
-            }, {
-                error.value = true
-            })
+            try {
+                viewModelScope.launch(Dispatchers.Default) {
+                    withContext(Dispatchers.IO) {
+                        albumRepository.create(album)
+                        error.postValue(false)
+                    }
+                }
+            } catch (exception: Exception) {
+                error.postValue(true)
+            }
         }
     }
 

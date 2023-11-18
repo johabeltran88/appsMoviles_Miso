@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Agregar Comentario"
+                android:text="@string/agregar_comentario"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -53,9 +53,10 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Nombre coleccionista"
+                android:hint="@string/nombre_coleccionista"
                 android:inputType="text"
-                android:text="@={viewModel.name}" />
+                android:text="@={viewModel.name}"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textViewErrorName"
@@ -76,9 +77,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Correo coleccionista"
-                android:inputType="text"
-                android:text="@={viewModel.email}" />
+                android:hint="@string/correo_coleccionista"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textViewErrorEmail"
@@ -99,9 +101,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="Teléfono coleccionista"
-                android:inputType="text"
-                android:text="@={viewModel.telephone}" />
+                android:hint="@string/tel_fono_coleccionista"
+                android:inputType="phone"
+                android:text="@={viewModel.telephone}"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textViewErrorTelephone"
@@ -143,9 +146,10 @@
                 android:layout_marginRight="20dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Descripción"
+                android:hint="@string/descripci_n"
                 android:inputType="textMultiLine"
-                android:text="@={viewModel.description}" />
+                android:text="@={viewModel.description}"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textViewErrorDescription"
@@ -167,33 +171,35 @@
                     android:id="@+id/btnSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:width="50dp"
                     android:backgroundTint="#03A9F4"
                     android:maxWidth="50dp"
                     android:minWidth="50dp"
-                    android:text="Agregar"
+                    android:text="@string/agregar"
                     android:textColorHighlight="#2196F3"
-                    android:textColorLink="#03A9F4" />
+                    android:textColorLink="#03A9F4"
+                    style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btnCancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:width="30dp"
                     android:backgroundTint="#FDF40303"
                     android:maxWidth="30dp"
                     android:minWidth="30dp"
-                    android:text="Cancelar"
+                    android:text="@string/cancelar"
                     android:textColorHighlight="#F32121"
-                    android:textColorLink="#F40303" />
+                    android:textColorLink="#F40303"
+                    style="?android:attr/buttonBarButtonStyle" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -5,12 +5,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.test.common.validateEmailValue
+import com.example.test.common.validateEmailValue
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.model.Collector
 import com.example.test.model.Comment
 import com.example.test.repository.CollectorRepository
 import com.example.test.repository.CommentRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -44,7 +50,7 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
 
     fun validateEmail() {
         valid.value = true
-        errorEmail.value = validateValue(email.value, 50)
+        errorEmail.value = validateEmailValue(email.value)
     }
 
     fun validateTelephone() {
@@ -52,7 +58,7 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
         errorTelephone.value = validateValue(telephone.value, 50)
     }
 
-    fun validateRating() {
+    private fun validateRating() {
         valid.value = true
         errorRating.value = validateSpinner(rating.value, "Puntuación")
     }
@@ -85,21 +91,23 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
                 telephone.value,
                 email.value
             )
-            collectorRepository.create(collector, {
-                val comment = Comment(
-                    null,
-                    description.value,
-                    rating.value?.toInt(),
-                    it
-                )
-                commentRepository.create(albumId.value, comment, {
-                    error.value = false
-                }, {
-                    error.value = true
-                })
-            }, {
-                error.value = true
-            })
+            try {
+                viewModelScope.launch(Dispatchers.Default) {
+                    withContext(Dispatchers.IO) {
+                        val collectorCreated = collectorRepository.create(collector)
+                        val comment = Comment(
+                            null,
+                            description.value,
+                            rating.value?.toInt(),
+                            collectorCreated
+                        )
+                        commentRepository.create(albumId.value, comment)
+                        error.postValue(false)
+                    }
+                }
+            } catch (exception: Exception) {
+                error.postValue(true)
+            }
         }
     }
 

@@ -33,7 +33,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Listado de artistas"
+                android:text="@string/listado_de_artistas"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
