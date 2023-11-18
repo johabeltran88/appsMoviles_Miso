@@ -5,14 +5,22 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.test.common.validateDate
 import com.example.test.common.validateValue
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Artist
 import com.example.test.repository.ArtistRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val artistRepository = ArtistRepository(application)
+    private val artistRepository = ArtistRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).artistDao()
+    )
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
@@ -50,7 +58,6 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun addArtist() {
-
         if (valid.value == true) {
             validateName()
         }
@@ -72,11 +79,16 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
                 description.value,
                 birthDate.value
             )
-            artistRepository.create(artist, {
-                error.value = false
-            }, {
-                error.value = true
-            })
+            try {
+                viewModelScope.launch(Dispatchers.Default) {
+                    withContext(Dispatchers.IO) {
+                        artistRepository.create(artist)
+                        error.postValue(false)
+                    }
+                }
+            } catch (exception: Exception) {
+                error.postValue(true)
+            }
         }
     }
 

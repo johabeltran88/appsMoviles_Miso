@@ -5,13 +5,21 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Artist
 import com.example.test.repository.ArtistRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VisitorListArtistViewModel(application: Application) : AndroidViewModel(application) {
 
-    
-    private val artistRepository = ArtistRepository(application)
+
+    private val artistRepository = ArtistRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).artistDao()
+    )
 
     // LiveData to hold the list of artist.
     val artists = MutableLiveData<List<Artist>>()
@@ -21,16 +29,15 @@ class VisitorListArtistViewModel(application: Application) : AndroidViewModel(ap
 
     // Function to fetch all albums and post the value to the LiveData.
     fun fetchAllArtists() {
-        artistRepository.getAll(
-            onComplete = { artistList ->
-                // Post the list of albums to the LiveData.
-                artists.postValue(artistList)
-            },
-            onError = { volleyError ->
-                // Post an error message to the LiveData.
-                error.postValue("Failed to fetch artists: ${volleyError.message}")
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    artists.postValue(artistRepository.getAll())
+                }
             }
-        )
+        } catch (exception: Exception) {
+            error.postValue("Failed to fetch artists: ${exception.message}")
+        }
     }
 
     class Factory(private val application: Application) : ViewModelProvider.Factory {

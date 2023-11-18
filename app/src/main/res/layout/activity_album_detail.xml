@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Detalle Albúm"
+                android:text="@string/detalle_alb_m"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -53,7 +53,7 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Agregar Comentario"
+                android:text="@string/agregar_comentario2"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>

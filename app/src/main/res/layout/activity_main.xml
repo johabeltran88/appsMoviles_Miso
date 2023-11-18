@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,8 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50px"
-                android:text="VinilApp"
+                android:layout_marginTop="25dp"
+                android:text="@string/vinilapp"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -32,28 +32,28 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginTop="150px"
+                android:layout_marginTop="25dp"
+                android:contentDescription="@string/imagen"
                 app:srcCompat="@drawable/img1" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150px"
-                android:text="Ingresa como:"
+                android:layout_marginTop="25dp"
+                android:text="@string/ingresa_como"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/buttonVisitor"
-                android:onClick="goToVisitorHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150px"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="Visitante"
+                android:text="@string/visitante"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
@@ -62,11 +62,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="75px"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:onClick="goToCollectorHome"
-                android:text="Coleccionista"
+                android:text="@string/coleccionista"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
         </LinearLayout>

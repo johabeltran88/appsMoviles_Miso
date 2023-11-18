@@ -17,6 +17,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1476993187">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1098684246">
           <value>
             <AndroidTestResultsTableState>
@@ -25,6 +38,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_3a_API_33_x86_64" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -43,20 +57,36 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-717426598">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-695524007">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
-                  <entry key="Duration" value="90" />
-                  <entry key="Pixel_XL_API_33" value="120" />
-                  <entry key="Tests" value="360" />
+                  <entry key="Duration" value="116" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Pixel_3a_API_33_x86_64" value="120" />
+                  <entry key="Pixel_XL_API_33" value="145" />
+                  <entry key="Tests" value="385" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
           </value>
         </entry>
-        <entry key="-627819260">
+        <entry key="-132133637">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
@@ -64,19 +94,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
-                </map>
-              </option>
-            </AndroidTestResultsTableState>
-          </value>
-        </entry>
-        <entry key="216960742">
-          <value>
-            <AndroidTestResultsTableState>
-              <option name="preferredColumnWidths">
-                <map>
-                  <entry key="Duration" value="90" />
-                  <entry key="Pixel_2_XL_API_34" value="120" />
-                  <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -90,6 +108,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_XL_API_33" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -121,6 +140,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="1721298739">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="1740830962">
           <value>
             <AndroidTestResultsTableState>
@@ -142,6 +174,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -155,6 +188,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="motorola moto g stylus 5G" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

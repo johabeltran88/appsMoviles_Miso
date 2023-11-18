@@ -5,19 +5,20 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.volley.Response
-import com.example.test.common.validateDate
-import com.example.test.common.validateSpinner
-import com.example.test.common.validateValue
+import androidx.lifecycle.viewModelScope
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Album
-import com.example.test.network.NetworkAdapterService
 import com.example.test.repository.AlbumRepository
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VisitorListAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val albumRepository = AlbumRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).albumDao()
+    )
 
     // LiveData to hold the list of albums.
     val albums = MutableLiveData<List<Album>>()
@@ -29,16 +30,15 @@ class VisitorListAlbumViewModel(application: Application) : AndroidViewModel(app
 
     // Function to fetch all albums and post the value to the LiveData.
     fun fetchAllAlbums() {
-        albumRepository.getAll(
-            onComplete = { albumList ->
-                // Post the list of albums to the LiveData.
-                albums.postValue(albumList)
-            },
-            onError = { volleyError ->
-                // Post an error message to the LiveData.
-                error.postValue("Failed to fetch albums: ${volleyError.message}")
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    albums.postValue(albumRepository.getAll())
+                }
             }
-        )
+        } catch (exception: Exception) {
+            error.postValue("Failed to fetch artists: ${exception.message}")
+        }
     }
 
     class Factory(private val application: Application) : ViewModelProvider.Factory {

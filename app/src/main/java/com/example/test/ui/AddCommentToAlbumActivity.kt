@@ -56,6 +56,17 @@ class AddCommentToAlbumActivity : AppCompatActivity() {
                 viewModel.validateEmail()
         }
 
+        viewModel.telephone.observe(this) {
+            it.apply {
+                viewModel.validateTelephone()
+            }
+        }
+
+        binding.telephone.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus)
+                viewModel.validateTelephone()
+        }
+
         viewModel.rating.observe(this) {
             it.apply {
                 viewModel.errorRating.value = validateSpinner(viewModel.rating.value, "Puntuación")

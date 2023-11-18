@@ -3,19 +3,16 @@ package com.example.test.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.test.databinding.ActivityCollectorListAlbumsBinding
 import com.example.test.databinding.ActivityVisitorListAlbumsBinding
 import com.example.test.ui.adapters.AlbumAdapter
-import com.example.test.viewmodel.CollectorListAlbumViewModel
 import com.example.test.viewmodel.VisitorListAlbumViewModel
 
 class VisitorListAlbumsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVisitorListAlbumsBinding
-    lateinit var albumAdapter: AlbumAdapter // Declare the adapter
+    private lateinit var albumAdapter: AlbumAdapter // Declare the adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

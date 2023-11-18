@@ -45,7 +45,7 @@ class ListArtistTest {
             ViewActions.scrollTo(),
             click()
         )
-        onView(withText("Listado de artistas")).check(
+        onView(withText("Lista de Artistas")).check(
             matches(isDisplayed())
         )
     }
@@ -75,7 +75,7 @@ class ListArtistTest {
         )
         onView(withId(R.id.description)).perform(
             ViewActions.scrollTo(),
-            ViewActions.typeText(Faker().yoda().quote())
+            ViewActions.typeText(Faker().lorem().sentence(15))
         )
         onView(withId(R.id.btnSubmit)).perform(
             ViewActions.scrollTo(),
@@ -99,13 +99,12 @@ class ListArtistTest {
             click()
         )
         SystemClock.sleep(2000)
-        onView(withText("Listado de artistas")).check(
+        onView(withText("Lista de Artistas")).check(
             matches(isDisplayed())
         )
         SystemClock.sleep(2000)
         val visitorListArtistActivity = getCurrentActivity<VisitorListArtistActivity>()
-        SystemClock.sleep(2000)
-        var position = 0;
+        var position = 0
         for (artist in visitorListArtistActivity?.artistAdapter?.artists!!) {
             if (artist.name == name) {
                 break
@@ -114,7 +113,6 @@ class ListArtistTest {
         }
         onView(withId(R.id.recycler_view_artist))
             .perform(RecyclerViewActions.scrollToPosition<ArtistAdapter.ArtistViewHolder>(position))
-        SystemClock.sleep(2000)
         onView(withText(name)).check(
             matches(isDisplayed())
         )

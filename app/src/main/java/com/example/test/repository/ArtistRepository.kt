@@ -1,27 +1,40 @@
 package com.example.test.repository
 
 import android.app.Application
-import com.android.volley.VolleyError
-import com.example.test.model.Album
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import com.example.test.database.ArtistDao
 import com.example.test.model.Artist
 import com.example.test.network.NetworkAdapterService
-import org.json.JSONObject
+import java.util.Locale
 
-class ArtistRepository(private val application: Application) {
+class ArtistRepository(private val application: Application, private val artistDao: ArtistDao) {
 
-    fun create(
-        artist: Artist,
-        onComplete: (resp: JSONObject) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        NetworkAdapterService.getInstance(application).createArtist(artist, onComplete, onError)
+    suspend fun create(artist: Artist) {
+        NetworkAdapterService.getInstance(application).createArtist(artist)
+        artistDao.deleteAll()
     }
 
-    fun getAll(
-        onComplete: (resp: List<Artist>) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        NetworkAdapterService.getInstance(application).getArtists(onComplete, onError)
+    suspend fun getAll(): List<Artist> {
+        val cached = artistDao.findAll()
+        return if (cached.isEmpty()) {
+            val connectivityManager =
+                application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkCapabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true ||
+                networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true
+            ) {
+                val artists = NetworkAdapterService.getInstance(application).getArtists()
+                artistDao.insertAll(artists)
+                return artists
+            } else {
+                emptyList()
+            }
+        } else {
+            cached.sortedBy { album -> album.name?.lowercase(Locale.ROOT) }
+        }
     }
 
 }
