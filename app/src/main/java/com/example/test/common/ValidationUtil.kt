@@ -26,6 +26,20 @@ fun validateValue(field: String?, maxLength: Int): String {
     return ""
 }
 
+fun validateEmailValue(field: String?): String {
+    if (field.isNullOrBlank()) {
+        return "El campo es requerido y no debe estar vacio"
+    } else {
+        // Expresión regular para validar un correo electrónico
+        val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+
+        // Verificar si el campo coincide con la expresión regular
+        if(emailRegex.matches(field) == false)
+            return "El campo debe ser un correo valido"
+        return ""
+    }
+}
+
 fun validateImage(field: String?): String {
     if (field.isNullOrBlank())
         return "La imagen es requerida y no debe estar vacia"

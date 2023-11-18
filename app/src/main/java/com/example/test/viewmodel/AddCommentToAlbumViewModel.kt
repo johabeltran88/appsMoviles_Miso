@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.test.common.validateEmailValue
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
 import com.example.test.model.Collector
@@ -44,7 +45,7 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
 
     fun validateEmail() {
         valid.value = true
-        errorEmail.value = validateValue(email.value, 50)
+        errorEmail.value = validateEmailValue(email.value)
     }
 
     fun validateTelephone() {
