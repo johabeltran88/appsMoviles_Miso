@@ -36,4 +36,12 @@ class AlbumWebService {
         return JSONObject(jsonString)
     }
 
+    fun albumWithArtist(
+        albumId: Int?,
+        artistId: Int?,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener
+    ): JsonObjectRequest{
+        return postRequest("$RESOURCE/$albumId/musicians/$artistId", JSONObject(), responseListener, errorListener)
+    }
 }

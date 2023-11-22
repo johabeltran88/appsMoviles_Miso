@@ -120,6 +120,14 @@ class NetworkAdapterService constructor(context: Context) {
         }))
     }
 
+    suspend fun albumWithArtist(albumId: Int?, artistId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(albumWebService.albumWithArtist(albumId, artistId, {
+            continuation.resume(true)
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
     suspend fun createCollector(collector: Collector): Collector =
         suspendCoroutine { continuation ->
             requestQueue.add(collectorWebService.create(collector, { response ->
