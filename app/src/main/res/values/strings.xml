@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test</string>
+    <string name="app_name">VinilApp</string>
     <string name="agregar_comentario">Agregar Comentario</string>
     <string name="nombre_coleccionista">Nombre coleccionista</string>
     <string name="correo_coleccionista">Correo coleccionista</string>
@@ -8,7 +8,6 @@
     <string name="agregar">Agregar</string>
     <string name="cancelar">Cancelar</string>
     <string name="detalle_alb_m">Detalle Albúm</string>
-    <string name="agregar_comentario2">Agregar Comentario</string>
     <string name="agregar_lbum">Agregar Álbum</string>
     <string name="nombre">Nombre</string>
     <string name="imagen">Imagen</string>
@@ -24,6 +23,11 @@
     <string name="coleccionista">Coleccionista</string>
     <string name="ver_artistas">Ver Artistas</string>
     <string name="listado_de_artistas">Lista de Artistas</string>
+    <string name="nombre_2">Nombre: </string>
+    <string name="fecha_lanzamiento_2">Fecha lanzamiento: </string>
+    <string name="g_nero_2">Género: </string>
+    <string name="disquera_2">Disquera: </string>
+    <string name="descripci_n_2">Descripción: </string>
     <array name="recordLabel">
         <item>Disquera</item>
         <item>Sony Music</item>

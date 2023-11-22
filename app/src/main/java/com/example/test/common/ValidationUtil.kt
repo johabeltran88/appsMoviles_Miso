@@ -34,7 +34,7 @@ fun validateEmailValue(field: String?): String {
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
 
         // Verificar si el campo coincide con la expresión regular
-        if(emailRegex.matches(field) == false)
+        if(!emailRegex.matches(field))
             return "El campo debe ser un correo valido"
         return ""
     }
@@ -50,10 +50,6 @@ fun validateImage(field: String?): String {
 
 fun isURLValid(url: String?): Boolean {
     return Patterns.WEB_URL.matcher(url).matches()
-}
-
-fun isValidEmail(email: String?): Boolean {
-    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
 
 fun isDateValid(date: String?): Boolean {

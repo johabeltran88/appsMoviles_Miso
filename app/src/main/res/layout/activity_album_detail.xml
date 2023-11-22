@@ -45,6 +45,64 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/nombre_2"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/imagen"
+                app:srcCompat="@drawable/img1" />
+
+            <TextView
+                android:id="@+id/releaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/fecha_lanzamiento_2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/g_nero_2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/recordLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/disquera_2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/descripci_n_2"
+                android:textSize="14sp" />
+
             <Button
                 android:id="@+id/btnAddComment"
                 android:layout_width="wrap_content"
@@ -53,9 +111,14 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#03A9F4"
                 android:minWidth="200dp"
-                android:text="@string/agregar_comentario2"
+                android:text="@string/agregar_comentario"
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </layout>
