@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "artists")
 data class Artist(
     @PrimaryKey val id: Int?,
-    val name:String?,
-    val image:String?,
-    val description:String?,
-    val birthDate:String?,
+    val name: String?,
+    val image: String?,
+    val description: String?,
+    val birthDate: String?,
 )

@@ -29,7 +29,9 @@ class VisitorListArtistActivity : AppCompatActivity() {
         binding.recyclerViewArtist.adapter = artistAdapter // Set the adapter
 
         // Initialize your ViewModel here (assuming you have a ViewModel set up)
-        val viewModel = ViewModelProvider(this)[VisitorListArtistViewModel::class.java]
+        val viewModel = ViewModelProvider(
+            this, VisitorListArtistViewModel.Factory(this.application)
+        )[VisitorListArtistViewModel::class.java]
         // Observe the album data from the ViewModel
         viewModel.artists.observe(this) { artists ->
             // When album data changes, update the adapter's dataset
