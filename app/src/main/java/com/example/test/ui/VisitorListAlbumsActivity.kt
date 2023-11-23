@@ -5,14 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.test.databinding.ActivityCollectorListAlbumsBinding
 import com.example.test.databinding.ActivityVisitorListAlbumsBinding
 import com.example.test.ui.adapters.AlbumAdapter
+import com.example.test.viewmodel.CollectorListAlbumViewModel
 import com.example.test.viewmodel.VisitorListAlbumViewModel
 
 class VisitorListAlbumsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVisitorListAlbumsBinding
-    private lateinit var albumAdapter: AlbumAdapter // Declare the adapter
+    lateinit var albumAdapter: AlbumAdapter // Declare the adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +48,12 @@ class VisitorListAlbumsActivity : AppCompatActivity() {
         viewModel.albumId.observe(this) {
             val intent = Intent(this, AlbumDetailActivity::class.java)
             intent.putExtra("albumId", it)
+            intent.putExtra("isCollector", false)
             startActivity(intent)
         }
 
         // Fetch the albums
         viewModel.fetchAllAlbums()
-
-
     }
 
 }

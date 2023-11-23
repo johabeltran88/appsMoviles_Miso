@@ -51,8 +51,6 @@ class CollectorListAlbums : AppCompatActivity() {
 
         // Fetch the albums
         viewModel.fetchAllAlbums()
-
-
     }
 
 }

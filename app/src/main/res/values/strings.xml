@@ -28,6 +28,7 @@
     <string name="g_nero_2">Género: </string>
     <string name="disquera_2">Disquera: </string>
     <string name="descripci_n_2">Descripción: </string>
+    <string name="comentarios">Comentarios</string>
     <array name="recordLabel">
         <item>Disquera</item>
         <item>Sony Music</item>

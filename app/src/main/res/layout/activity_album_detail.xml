@@ -115,6 +115,15 @@
                 android:textColorHighlight="#2196F3"
                 android:textColorLink="#03A9F4" />
 
+            <TextView
+                android:id="@+id/lblComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/comentarios"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewComments"
                 android:layout_width="match_parent"

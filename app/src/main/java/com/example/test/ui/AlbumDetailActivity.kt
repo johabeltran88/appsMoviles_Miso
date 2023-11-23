@@ -3,6 +3,7 @@ package com.example.test.ui
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +63,12 @@ class AlbumDetailActivity : AppCompatActivity() {
 
         viewModel.fetchAllComments(this.intent.getIntExtra("albumId", 0))
         viewModel.fetchAlbum(this.intent.getIntExtra("albumId", 0))
+
+        if (this.intent.getBooleanExtra("isCollector", true)) {
+            binding.lblComments.visibility = View.GONE
+        } else {
+            binding.btnAddComment.visibility = View.GONE
+        }
     }
 
     override fun onRestart() {
