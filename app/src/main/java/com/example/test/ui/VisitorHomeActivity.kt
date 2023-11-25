@@ -22,7 +22,7 @@ class VisitorHomeActivity : AppCompatActivity() {
 
         //Get Albums Activity start
         binding.btnListAlbum.setOnClickListener {
-            startActivity(Intent(this, CollectorListAlbums::class.java))
+            startActivity(Intent(this, VisitorListAlbumsActivity::class.java))
         }
     }
 }

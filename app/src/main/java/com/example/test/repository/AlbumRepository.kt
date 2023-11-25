@@ -17,6 +17,10 @@ class AlbumRepository(private val application: Application, private val albumDao
         albumDao.deleteAll()
     }
 
+    suspend fun albumWithArtist(albumId:Int?, artistId:Int?){
+        NetworkAdapterService.getInstance(application).albumWithArtist(albumId, artistId)
+    }
+
     suspend fun getAll(): List<Album> {
         val cached = albumDao.findAll()
         return if (cached.isEmpty()) {
@@ -29,12 +33,32 @@ class AlbumRepository(private val application: Application, private val albumDao
             ) {
                 val albums = NetworkAdapterService.getInstance(application).getAlbums()
                 albumDao.insertAll(albums)
-                return albums
+                albums
             } else {
                 emptyList()
             }
         } else {
             cached.sortedBy { album -> album.name?.lowercase(Locale.ROOT) }
+        }
+    }
+
+    suspend fun getById(albumId: Int?): Album? {
+        val cached = albumDao.findById(albumId)
+        return if (cached == null) {
+            val connectivityManager =
+                application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkCapabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true ||
+                networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true
+            ) {
+                val album = NetworkAdapterService.getInstance(application).getAlbum(albumId)
+                album
+            } else {
+                null
+            }
+        } else {
+            cached
         }
     }
 

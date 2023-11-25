@@ -30,6 +30,14 @@ class ArtistWebService {
         return postRequest(RESOURCE, toJSONObject(artist), responseListener, errorListener)
     }
 
+    fun getById(
+        artistId: Int?,
+        responseListener: Response.Listener<String>,
+        errorListener: Response.ErrorListener
+    ): StringRequest {
+        return getRequest("${ArtistWebService.RESOURCE}/$artistId", responseListener, errorListener)
+    }
+
     private fun toJSONObject(artist: Artist): JSONObject {
         val gson = Gson()
         val jsonString = gson.toJson(artist)

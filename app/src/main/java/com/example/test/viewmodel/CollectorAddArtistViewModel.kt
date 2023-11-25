@@ -9,7 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.test.common.validateDate
 import com.example.test.common.validateValue
 import com.example.test.database.VinylRoomDatabase
+import com.example.test.model.Album
 import com.example.test.model.Artist
+import com.example.test.repository.AlbumRepository
 import com.example.test.repository.ArtistRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +22,11 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
     private val artistRepository = ArtistRepository(
         application,
         VinylRoomDatabase.getDatabase(application.applicationContext).artistDao()
+    )
+
+    private val albumRepository = AlbumRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).albumDao()
     )
 
     var name = MutableLiveData<String>()
@@ -36,6 +43,9 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
 
     var error = MutableLiveData<Boolean>()
     var valid = MutableLiveData<Boolean>()
+
+    var listaAlbumes = MutableLiveData<List<Album>>()
+    var albumPosition = MutableLiveData<Int>()
 
     fun validateName() {
         valid.value = true
@@ -82,13 +92,27 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
             try {
                 viewModelScope.launch(Dispatchers.Default) {
                     withContext(Dispatchers.IO) {
-                        artistRepository.create(artist)
+                        val artistCreated = artistRepository.create(artist)
+                        albumRepository.albumWithArtist(listaAlbumes.value?.get(albumPosition.value!!)?.id, artistCreated.id)
                         error.postValue(false)
                     }
                 }
+
             } catch (exception: Exception) {
                 error.postValue(true)
             }
+        }
+    }
+
+    fun obtenerAlbumes(){
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    listaAlbumes.postValue(albumRepository.getAll())
+                }
+            }
+        } catch (exception: Exception) {
+            error.postValue(true)
         }
     }
 

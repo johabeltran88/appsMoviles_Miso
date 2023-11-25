@@ -30,10 +30,26 @@ class AlbumWebService {
         return postRequest(RESOURCE, toJSONObject(album), responseListener, errorListener)
     }
 
+    fun getById(
+        albumId: Int?,
+        responseListener: Response.Listener<String>,
+        errorListener: Response.ErrorListener
+    ): StringRequest {
+        return getRequest("$RESOURCE/$albumId", responseListener, errorListener)
+    }
+
     private fun toJSONObject(album: Album): JSONObject {
         val gson = Gson()
         val jsonString = gson.toJson(album)
         return JSONObject(jsonString)
     }
 
+    fun albumWithArtist(
+        albumId: Int?,
+        artistId: Int?,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener
+    ): JsonObjectRequest{
+        return postRequest("$RESOURCE/$albumId/musicians/$artistId", JSONObject(), responseListener, errorListener)
+    }
 }
