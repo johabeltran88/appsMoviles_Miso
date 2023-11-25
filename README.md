@@ -10,7 +10,7 @@
 ## Correr Pruebas Automatizadas con Espresso
 
 1) Ubicarse en el archivo que se encuentra en la siguiente ruta: appsMoviles_Miso\app\java\com.example.test (Android Test)
-2) Dar click derecho sobre la carpeta mencionada anteriormente, y seleccionar la opción "RUN 'Test in 'com.examp...'". Esto ejecutará las pruebas para las funcionalidades "Agregar Artista", "Agregar álbum", "Listar Artista", "Listar ÁLbum" y "Crear Comentario"
+2) Dar click derecho sobre la carpeta mencionada anteriormente, y seleccionar la opción "RUN 'Test in 'com.examp...'". Esto ejecutará las pruebas para las funcionalidades "Agregar Artista", "Agregar álbum", "Listar Artista", "Listar ÁLbum", "Crear Comentario", "Ver detalle de un álbum", "Ver detalle de un artista" y "Agregar un álbum a un artista
     
 # APK
 En el repositorio se encuentra el archivo app-debug.apk, para que lo descarguen e instalen la app en su dispositivo móvil Android con el objetivo de realizar las pruebas necesarias.
