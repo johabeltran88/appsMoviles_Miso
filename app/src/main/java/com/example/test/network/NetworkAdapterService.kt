@@ -17,7 +17,6 @@ import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-
 class NetworkAdapterService constructor(context: Context) {
 
     private val albumWebService = AlbumWebService()
@@ -40,16 +39,14 @@ class NetworkAdapterService constructor(context: Context) {
         requestQueue.add(artistWebService.getAll({ response ->
             val artists = mutableListOf<Artist>()
             val resp = JSONArray(response)
-            var item: JSONObject?
             for (i in 0 until resp.length()) {
-                item = resp.getJSONObject(i)
                 artists.add(
                     i, Artist(
-                        id = item.getInt("id"),
-                        name = item.getString("name"),
-                        image = item.getString("image"),
-                        description = item.getString("description"),
-                        birthDate = item.getString("birthDate")
+                        id = resp.getJSONObject(i).getInt("id"),
+                        name = resp.getJSONObject(i).getString("name"),
+                        image = resp.getJSONObject(i).getString("image"),
+                        description = resp.getJSONObject(i).getString("description"),
+                        birthDate = resp.getJSONObject(i).getString("birthDate")
                     )
                 )
             }
@@ -64,18 +61,16 @@ class NetworkAdapterService constructor(context: Context) {
         requestQueue.add(albumWebService.getAll({ response ->
             val resp = JSONArray(response)
             val albums = mutableListOf<Album>()
-            var item: JSONObject?
             for (i in 0 until resp.length()) {
-                item = resp.getJSONObject(i)
                 albums.add(
                     i, Album(
-                        id = item.getInt("id"),
-                        name = item.getString("name"),
-                        cover = item.getString("cover"),
-                        recordLabel = item.getString("recordLabel"),
-                        releaseDate = item.getString("releaseDate"),
-                        genre = item.getString("genre"),
-                        description = item.getString("description")
+                        id = resp.getJSONObject(i).getInt("id"),
+                        name = resp.getJSONObject(i).getString("name"),
+                        cover = resp.getJSONObject(i).getString("cover"),
+                        recordLabel = resp.getJSONObject(i).getString("recordLabel"),
+                        releaseDate = resp.getJSONObject(i).getString("releaseDate"),
+                        genre = resp.getJSONObject(i).getString("genre"),
+                        description = resp.getJSONObject(i).getString("description")
                     )
                 )
             }
@@ -151,9 +146,88 @@ class NetworkAdapterService constructor(context: Context) {
                     id = response.getInt("id"),
                     description = response.getString("description"),
                     rating = response.getInt("rating"),
+                    albumId = albumId,
                     collector = comment.collector
                 )
             )
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getAlbum(albumId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(albumWebService.getById(albumId, { response ->
+            continuation.resume(
+                Album(
+                    id = JSONObject(response).getInt("id"),
+                    name = JSONObject(response).getString("name"),
+                    cover = JSONObject(response).getString("cover"),
+                    recordLabel = JSONObject(response).getString("recordLabel"),
+                    releaseDate = JSONObject(response).getString("releaseDate"),
+                    genre = JSONObject(response).getString("genre"),
+                    description = JSONObject(response).getString("description")
+                )
+            )
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getArtistAlbums(artistId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(artistWebService.getById(artistId, { response ->
+            val resp = JSONArray(JSONObject(response).getString("albums"))
+            val albums = mutableListOf<Album>()
+            for (i in 0 until resp.length()) {
+                albums.add(
+                    i, Album(
+                        id = resp.getJSONObject(i).getInt("id"),
+                        name = resp.getJSONObject(i).getString("name"),
+                        cover = resp.getJSONObject(i).getString("cover"),
+                        recordLabel = resp.getJSONObject(i).getString("recordLabel"),
+                        releaseDate = resp.getJSONObject(i).getString("releaseDate"),
+                        genre = resp.getJSONObject(i).getString("genre"),
+                        description = resp.getJSONObject(i).getString("description")
+                    )
+                )
+            }
+            continuation.resume(albums)
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getArtist(artistId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(artistWebService.getById(artistId, { response ->
+            continuation.resume(
+                Artist(
+                    id = JSONObject(response).getInt("id"),
+                    name = JSONObject(response).getString("name"),
+                    image = JSONObject(response).getString("image"),
+                    description = JSONObject(response).getString("description"),
+                    birthDate = JSONObject(response).getString("birthDate")
+                )
+            )
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getComments(albumId: Int?) = suspendCoroutine<List<Comment>> { continuation ->
+        requestQueue.add(commentWebService.getAll(albumId, { response ->
+            val resp = JSONArray(response)
+            val comments = mutableListOf<Comment>()
+            for (i in 0 until resp.length()) {
+                comments.add(
+                    i, Comment(
+                        id = resp.getJSONObject(i).getInt("id"),
+                        description = resp.getJSONObject(i).getString("description"),
+                        rating = resp.getJSONObject(i).getInt("rating"),
+                        albumId = albumId,
+                        collector = null
+                    )
+                )
+            }
+            continuation.resume(comments)
         }, {
             continuation.resumeWithException(it)
         }))

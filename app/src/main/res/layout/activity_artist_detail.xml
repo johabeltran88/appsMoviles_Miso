@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:screenOrientation="landscape"
-    tools:context=".ui.AlbumDetailActivity">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.test.viewmodel.AlbumDetailViewModel" />
-    </data>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ArtistDetailActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -41,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="@string/detalle_alb_m"
+                android:text="@string/detalle_art_m"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -64,33 +58,13 @@
                 app:srcCompat="@drawable/img1" />
 
             <TextView
-                android:id="@+id/releaseDate"
+                android:id="@+id/birthDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:text="@string/fecha_lanzamiento_2"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/genre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="@string/g_nero_2"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/recordLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="@string/disquera_2"
+                android:text="@string/fecha_nacimiento_2"
                 android:textSize="14sp" />
 
             <TextView
@@ -103,31 +77,19 @@
                 android:text="@string/descripci_n_2"
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/btnAddComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#03A9F4"
-                android:minWidth="200dp"
-                android:text="@string/agregar_comentario"
-                android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
-
             <TextView
-                android:id="@+id/lblComments"
+                android:id="@+id/lblAlbums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/comentarios"
+                android:text="@string/albumes"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewComments"
+                android:id="@+id/recyclerViewAlbums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

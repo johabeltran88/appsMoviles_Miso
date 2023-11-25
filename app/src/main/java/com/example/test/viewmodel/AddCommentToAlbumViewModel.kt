@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.test.common.validateEmailValue
-import com.example.test.common.validateEmailValue
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
+import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Collector
 import com.example.test.model.Comment
 import com.example.test.repository.CollectorRepository
@@ -21,7 +21,10 @@ import kotlinx.coroutines.withContext
 class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(application) {
 
     private val collectorRepository = CollectorRepository(application)
-    private val commentRepository = CommentRepository(application)
+    private val commentRepository = CommentRepository(
+        application,
+        VinylRoomDatabase.getDatabase(application.applicationContext).commentDao()
+    )
 
     var albumId = MutableLiveData<Int>()
 
@@ -99,6 +102,7 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
                             null,
                             description.value,
                             rating.value?.toInt(),
+                            albumId.value,
                             collectorCreated
                         )
                         commentRepository.create(albumId.value, comment)
