@@ -17,7 +17,6 @@ import java.util.Locale
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-
 class NetworkAdapterService constructor(context: Context) {
 
     private val albumWebService = AlbumWebService()
@@ -159,6 +158,45 @@ class NetworkAdapterService constructor(context: Context) {
                     releaseDate = JSONObject(response).getString("releaseDate"),
                     genre = JSONObject(response).getString("genre"),
                     description = JSONObject(response).getString("description")
+                )
+            )
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getArtistAlbums(artistId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(artistWebService.getById(artistId, { response ->
+            val resp = JSONArray(JSONObject(response).getString("albums"))
+            val albums = mutableListOf<Album>()
+            for (i in 0 until resp.length()) {
+                albums.add(
+                    i, Album(
+                        id = resp.getJSONObject(i).getInt("id"),
+                        name = resp.getJSONObject(i).getString("name"),
+                        cover = resp.getJSONObject(i).getString("cover"),
+                        recordLabel = resp.getJSONObject(i).getString("recordLabel"),
+                        releaseDate = resp.getJSONObject(i).getString("releaseDate"),
+                        genre = resp.getJSONObject(i).getString("genre"),
+                        description = resp.getJSONObject(i).getString("description")
+                    )
+                )
+            }
+            continuation.resume(albums)
+        }, {
+            continuation.resumeWithException(it)
+        }))
+    }
+
+    suspend fun getArtist(artistId: Int?) = suspendCoroutine { continuation ->
+        requestQueue.add(artistWebService.getById(artistId, { response ->
+            continuation.resume(
+                Artist(
+                    id = JSONObject(response).getInt("id"),
+                    name = JSONObject(response).getString("name"),
+                    image = JSONObject(response).getString("image"),
+                    description = JSONObject(response).getString("description"),
+                    birthDate = JSONObject(response).getString("birthDate")
                 )
             )
         }, {

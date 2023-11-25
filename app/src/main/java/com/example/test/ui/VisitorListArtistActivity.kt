@@ -1,5 +1,6 @@
 package com.example.test.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -36,6 +37,16 @@ class VisitorListArtistActivity : AppCompatActivity() {
         viewModel.artists.observe(this) { artists ->
             // When album data changes, update the adapter's dataset
             artistAdapter.updateArtists(artists)
+        }
+
+        artistAdapter.setOnItemClickListener {
+            viewModel.artistId.value = viewModel.artists.value?.get(it)?.id
+        }
+
+        viewModel.artistId.observe(this) {
+            val intent = Intent(this, ArtistDetailActivity::class.java)
+            intent.putExtra("artistId", it)
+            startActivity(intent)
         }
 
         // Fetch the albums

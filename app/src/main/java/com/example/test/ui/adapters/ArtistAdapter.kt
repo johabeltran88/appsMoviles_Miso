@@ -30,9 +30,19 @@ class ArtistAdapter(var artists: List<Artist>) :
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         val artist = artists[position]
         holder.itemView.setOnClickListener {
-
+            onItemClick(position)
         }
         holder.nameTextView.text = artist.name ?: "Unknown"
+    }
+
+    private var onItemClickListener: ((Int) -> Unit)? = null
+
+    private fun onItemClick(position: Int) {
+        onItemClickListener?.invoke(position)
+    }
+
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     @SuppressLint("NotifyDataSetChanged")

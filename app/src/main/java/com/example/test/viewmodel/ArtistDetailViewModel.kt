@@ -7,48 +7,58 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.test.database.VinylRoomDatabase
+import com.example.test.model.Album
 import com.example.test.model.Artist
 import com.example.test.repository.ArtistRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VisitorListArtistViewModel(application: Application) : AndroidViewModel(application) {
-
+class ArtistDetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private val artistRepository = ArtistRepository(
         application,
         VinylRoomDatabase.getDatabase(application.applicationContext).artistDao()
     )
 
-    // LiveData to hold the list of artist.
-    val artists = MutableLiveData<List<Artist>>()
+    val albums = MutableLiveData<List<Album>>()
+    val error = MutableLiveData<Boolean>()
+    val artist = MutableLiveData<Artist>()
 
-    // LiveData to hold any error state.
-    val error = MutableLiveData<String>()
-
-    val artistId = MutableLiveData<Int>()
-
-    // Function to fetch all albums and post the value to the LiveData.
-    fun fetchAllArtists() {
+    fun fetchAllAlbums(artistId: Int?) {
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {
-                    artists.postValue(artistRepository.getAll())
+                    albums.postValue(artistRepository.getArtistAlbums(artistId))
+                    error.postValue(false)
                 }
             }
         } catch (exception: Exception) {
-            error.postValue("Failed to fetch artists: ${exception.message}")
+            error.postValue(true)
+        }
+    }
+
+    fun fetchArtist(artistId: Int?) {
+        try {
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    artist.postValue(artistRepository.getById(artistId))
+                    error.postValue(false)
+                }
+            }
+        } catch (exception: Exception) {
+            error.postValue(true)
         }
     }
 
     class Factory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(VisitorListArtistViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(ArtistDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return VisitorListArtistViewModel(application) as T
+                return ArtistDetailViewModel(application) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
+
 }
