@@ -17,6 +17,10 @@ class AlbumRepository(private val application: Application, private val albumDao
         albumDao.deleteAll()
     }
 
+    suspend fun albumWithArtist(albumId:Int?, artistId:Int?){
+        NetworkAdapterService.getInstance(application).albumWithArtist(albumId, artistId)
+    }
+
     suspend fun getAll(): List<Album> {
         val cached = albumDao.findAll()
         return if (cached.isEmpty()) {

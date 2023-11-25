@@ -1,6 +1,8 @@
 package com.example.test
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.typeText
@@ -13,6 +15,8 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.test.ui.MainActivity
+import org.hamcrest.CoreMatchers.not
+import org.hamcrest.Matchers
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -43,6 +47,9 @@ class CreateArtistTest {
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/10/2023"))
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        //Collector Add Artist Activity - choose album
+        onView(withId(R.id.albumes)).perform(scrollTo(), click())
+        Espresso.onData(Matchers.allOf(Matchers.`is`(Matchers.instanceOf<Any>(String::class.java)), Matchers.`is`("114-A"))).perform(click())
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
@@ -100,7 +107,8 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(isDisplayed()))
+        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(not(isDisplayed())))
+            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
     }
 
     @Test
@@ -118,7 +126,8 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
-        onView(withText("La imagen es requerida y no debe estar vacia")).check(matches(isDisplayed()))
+        onView(withText("La imagen es requerida y no debe estar vacia")).check(matches(not(isDisplayed())))
+            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
     }
 
     @Test
@@ -173,7 +182,8 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es de maximo de 50 caracteres")).check(matches(isDisplayed()))
+        onView(withText("El campo es de maximo de 50 caracteres")).check(matches(not(isDisplayed())))
+            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
     }
     @Test
     fun addArtistMaxNameCharactersDescription() {

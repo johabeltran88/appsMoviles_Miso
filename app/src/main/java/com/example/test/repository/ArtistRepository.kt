@@ -13,9 +13,10 @@ import java.util.Locale
 
 class ArtistRepository(private val application: Application, private val artistDao: ArtistDao) {
 
-    suspend fun create(artist: Artist) {
-        NetworkAdapterService.getInstance(application).createArtist(artist)
+    suspend fun create(artist: Artist) : Artist {
+        val artistCreated = NetworkAdapterService.getInstance(application).createArtist(artist)
         artistDao.deleteAll()
+        return artistCreated
     }
 
     suspend fun getAll(): List<Artist> {
