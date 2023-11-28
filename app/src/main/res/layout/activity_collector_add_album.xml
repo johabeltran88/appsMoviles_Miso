@@ -66,7 +66,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorName}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -90,7 +90,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorImage}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -114,7 +114,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorReleaseDate}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <Spinner
@@ -134,7 +134,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorGenre}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <Spinner
@@ -154,7 +154,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorRecordLabel}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -179,7 +179,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorDescription}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -213,7 +213,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:width="30dp"
-                    android:backgroundTint="#01579B"
+                    android:backgroundTint="#D32F2F"
                     android:maxWidth="30dp"
                     android:minWidth="30dp"
                     android:text="@string/cancelar"

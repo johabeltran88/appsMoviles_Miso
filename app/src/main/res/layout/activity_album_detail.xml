@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="#01579B"
                 android:minWidth="200dp"
                 android:text="@string/agregar_comentario"
                 android:textColorHighlight="#2196F3"
