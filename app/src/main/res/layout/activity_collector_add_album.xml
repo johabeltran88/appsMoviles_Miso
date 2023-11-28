@@ -202,7 +202,7 @@
                     android:text="@string/agregar"
                     android:textColorHighlight="#2196F3"
                     android:textColorLink="#03A9F4"
-                    style="?android:attr/buttonBarButtonStyle" />
+                     />
 
                 <Button
                     android:id="@+id/btnCancel"
@@ -219,7 +219,7 @@
                     android:text="@string/cancelar"
                     android:textColorHighlight="#F32121"
                     android:textColorLink="#F40303"
-                    style="?android:attr/buttonBarButtonStyle" />
+                     />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

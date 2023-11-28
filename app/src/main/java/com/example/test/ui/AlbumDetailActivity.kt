@@ -2,12 +2,16 @@ package com.example.test.ui
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.test.R
 import com.example.test.common.changeDateFormat
 import com.example.test.databinding.ActivityAlbumDetailBinding
 import com.example.test.ui.adapters.CommentAdapter
@@ -27,6 +31,10 @@ class AlbumDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
+        upArrow?.setColorFilter(resources.getColor(R.color.your_color), PorterDuff.Mode.SRC_ATOP)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         viewModel = ViewModelProvider(
             this, AlbumDetailViewModel.Factory(this.application)

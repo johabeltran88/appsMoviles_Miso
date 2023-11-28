@@ -1,10 +1,14 @@
 package com.example.test.ui
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.test.R
 import com.example.test.databinding.ActivityCollectorListAlbumsBinding
 import com.example.test.ui.adapters.AlbumAdapter
 import com.example.test.viewmodel.CollectorListAlbumViewModel
@@ -38,6 +42,10 @@ class CollectorListAlbums : AppCompatActivity() {
             // When album data changes, update the adapter's dataset
             albumAdapter.updateAlbums(albums)
         }
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
+        upArrow?.setColorFilter(resources.getColor(R.color.your_color), PorterDuff.Mode.SRC_ATOP)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         albumAdapter.setOnItemClickListener {
             viewModel.albumId.value = viewModel.albums.value?.get(it)?.id

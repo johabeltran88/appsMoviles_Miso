@@ -179,8 +179,7 @@
                     android:minWidth="50dp"
                     android:text="@string/agregar"
                     android:textColorHighlight="#2196F3"
-                    android:textColorLink="#03A9F4"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColorLink="#01579B" />
 
                 <Button
                     android:id="@+id/btnCancel"
@@ -196,8 +195,7 @@
                     android:minWidth="30dp"
                     android:text="@string/cancelar"
                     android:textColorHighlight="#F32121"
-                    android:textColorLink="#F40303"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColorLink="#F40303" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
