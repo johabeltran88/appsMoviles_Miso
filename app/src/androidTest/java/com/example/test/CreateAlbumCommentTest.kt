@@ -78,7 +78,7 @@ class CreateAlbumCommentTest {
             .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
-        onView(withId(R.id.name)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.name)).perform(scrollTo(), click(), typeText(""))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
@@ -91,10 +91,7 @@ class CreateAlbumCommentTest {
                 ), Matchers.`is`("Uno")
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
-        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
-        //Check if alert
         onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
@@ -182,7 +179,7 @@ class CreateAlbumCommentTest {
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
-        onView(withId(R.id.telephone)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.telephone)).perform(scrollTo(), click(), typeText(""))
         onView(withId(R.id.rating)).perform(click())
         Espresso.onData(
             Matchers.allOf(
@@ -195,8 +192,6 @@ class CreateAlbumCommentTest {
         ).perform(click())
 
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
-        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
-        //Check if alert
         onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )

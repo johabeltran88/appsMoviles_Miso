@@ -34,6 +34,7 @@ import androidx.test.runner.lifecycle.Stage;
 import com.example.test.model.Album;
 import com.example.test.ui.CollectorListAlbums;
 import com.example.test.ui.MainActivity;
+import com.example.test.ui.VisitorListAlbumsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -174,7 +175,7 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.btnListAlbum), isDisplayed()));
         listarAlbumBtn.perform(click());
 
-        CollectorListAlbums visitorListAlbumsActivity = getCurrentActivity();
+        VisitorListAlbumsActivity visitorListAlbumsActivity = getCurrentActivity();
         SystemClock.sleep(2000);
 
         int position = 0;

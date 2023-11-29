@@ -24,6 +24,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.example.test.ui.CollectorListAlbums
 import com.example.test.ui.MainActivity
+import com.example.test.ui.VisitorListAlbumsActivity
 import com.example.test.ui.adapters.AlbumAdapter.AlbumViewHolder
 import com.example.test.ui.adapters.CommentAdapter.CommentViewHolder
 import com.github.javafaker.Faker
@@ -135,7 +136,7 @@ class DetailAlbumTest {
             matches(isDisplayed())
         )
         sleep(2000)
-        val visitorListAlbumActivity = getCurrentActivity<CollectorListAlbums>()
+        val visitorListAlbumActivity = getCurrentActivity<VisitorListAlbumsActivity>()
         var position = 0
         for (album in visitorListAlbumActivity?.albumAdapter?.albums!!) {
             if (album.name == name) {
