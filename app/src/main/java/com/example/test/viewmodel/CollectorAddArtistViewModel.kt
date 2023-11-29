@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.test.common.validateDate
-import com.example.test.common.validateValue
 import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Album
 import com.example.test.model.Artist
@@ -31,57 +29,32 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
+    var isValidName = MutableLiveData<Boolean>()
 
     var image = MutableLiveData<String>()
     var errorImage = MutableLiveData<String>()
-
-    var description = MutableLiveData<String>()
-    var errorDescription = MutableLiveData<String>()
+    var isValidImage = MutableLiveData<Boolean>()
 
     var birthDate = MutableLiveData<String>()
     var errorBirthDate = MutableLiveData<String>()
+    var isValidBirthDate = MutableLiveData<Boolean>()
+
+    var description = MutableLiveData<String>()
+    var errorDescription = MutableLiveData<String>()
+    var isValidDescription = MutableLiveData<Boolean>()
 
     var error = MutableLiveData<Boolean>()
-    var valid = MutableLiveData<Boolean>()
 
     var listaAlbumes = MutableLiveData<List<Album>>()
     var albumPosition = MutableLiveData<Int>()
 
-    fun validateName() {
-        valid.value = true
-        errorName.value = validateValue(name.value, 50)
-    }
-
-    fun validateImage() {
-        valid.value = true
-        errorImage.value = com.example.test.common.validateImage(image.value)
-    }
-
-    fun validateDescription() {
-        valid.value = true
-        errorDescription.value = validateValue(description.value, 500)
-    }
-
-    fun validateBirthDate() {
-        valid.value = true
-        errorBirthDate.value = validateDate(birthDate.value)
-    }
-
     fun addArtist() {
-        if (valid.value == true) {
-            validateName()
-        }
-        if (valid.value == true) {
-            validateImage()
-        }
-        if (valid.value == true) {
-            validateDescription()
-        }
-        if (valid.value == true) {
-            validateBirthDate()
-        }
-
-        if (valid.value == true) {
+        if (
+            isValidName.value == true
+            && isValidImage.value == true
+            && isValidBirthDate.value == true
+            && isValidDescription.value == true
+        ) {
             val artist = Artist(
                 null,
                 name.value,
@@ -93,7 +66,10 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
                 viewModelScope.launch(Dispatchers.Default) {
                     withContext(Dispatchers.IO) {
                         val artistCreated = artistRepository.create(artist)
-                        albumRepository.albumWithArtist(listaAlbumes.value?.get(albumPosition.value!!)?.id, artistCreated.id)
+                        albumRepository.albumWithArtist(
+                            listaAlbumes.value?.get(albumPosition.value!!)?.id,
+                            artistCreated.id
+                        )
                         error.postValue(false)
                     }
                 }
@@ -104,7 +80,7 @@ class CollectorAddArtistViewModel(application: Application) : AndroidViewModel(a
         }
     }
 
-    fun obtenerAlbumes(){
+    fun obtenerAlbumes() {
         try {
             viewModelScope.launch(Dispatchers.Default) {
                 withContext(Dispatchers.IO) {

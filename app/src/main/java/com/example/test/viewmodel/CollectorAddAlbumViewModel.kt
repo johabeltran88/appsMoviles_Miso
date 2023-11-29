@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.test.common.isURLValid
 import com.example.test.common.validateDate
 import com.example.test.common.validateSpinner
 import com.example.test.common.validateValue
@@ -25,75 +26,39 @@ class CollectorAddAlbumViewModel(application: Application) : AndroidViewModel(ap
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
+    var isValidName = MutableLiveData<Boolean>()
 
     var image = MutableLiveData<String>()
     var errorImage = MutableLiveData<String>()
+    var isValidImage = MutableLiveData<Boolean>()
 
     var releaseDate = MutableLiveData<String>()
     var errorReleaseDate = MutableLiveData<String>()
+    var isValidReleaseDate = MutableLiveData<Boolean>()
 
     var genre = MutableLiveData<String>()
     var errorGenre = MutableLiveData<String>()
+    var isValidGenre = MutableLiveData<Boolean>()
 
     var recordLabel = MutableLiveData<String>()
     var errorRecordLabel = MutableLiveData<String>()
+    var isValidRecordLabel = MutableLiveData<Boolean>()
 
     var description = MutableLiveData<String>()
     var errorDescription = MutableLiveData<String>()
+    var isValidDescription = MutableLiveData<Boolean>()
 
     var error = MutableLiveData<Boolean>()
-    var valid = MutableLiveData<Boolean>()
-
-    fun validateName() {
-        valid.value = true
-        errorName.value = validateValue(name.value, 50)
-    }
-
-    fun validateImage() {
-        valid.value = true
-        errorImage.value = com.example.test.common.validateImage(image.value)
-    }
-
-    fun validateReleaseDate() {
-        valid.value = true
-        errorReleaseDate.value = validateDate(releaseDate.value)
-    }
-
-    private fun validateGenre() {
-        valid.value = true
-        errorGenre.value = validateSpinner(genre.value, "Género")
-    }
-
-    private fun validateRecordLabel() {
-        valid.value = true
-        errorRecordLabel.value = validateSpinner(recordLabel.value, "Disquera")
-    }
-
-    fun validateDescription() {
-        valid.value = true
-        errorDescription.value = validateValue(description.value, 500)
-    }
 
     fun addAlbum() {
-        if (valid.value == true) {
-            validateName()
-        }
-        if (valid.value == true) {
-            validateImage()
-        }
-        if (valid.value == true) {
-            validateGenre()
-        }
-        if (valid.value == true) {
-            validateRecordLabel()
-        }
-        if (valid.value == true) {
-            validateReleaseDate()
-        }
-        if (valid.value == true) {
-            validateDescription()
-        }
-        if (valid.value == true) {
+        if (
+            isValidName.value == true
+            && isValidImage.value == true
+            && isValidReleaseDate.value == true
+            && isValidGenre.value == true
+            && isValidRecordLabel.value == true
+            && isValidDescription.value == true
+        ) {
             val album = Album(
                 null,
                 name.value,

@@ -57,7 +57,7 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
         listarAlbumBtn.perform(scrollTo(), click());
 
-        onView(withId(R.id.textView5)).check(matches(withText("Lista de Álbumes")));
+        onView(withId(R.id.textView5)).check(matches(withText(R.string.listado_de_lbumes)));
     }
 
     @Test
@@ -68,17 +68,17 @@ public class ListAlbumTest {
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.btnListAlbum), isDisplayed()));
         listarAlbumBtn.perform(click());
 
-        onView(withText("Lista de Álbumes")).check(matches(isDisplayed()));
+        onView(withText(R.string.listado_de_lbumes)).check(matches(isDisplayed()));
     }
 
     @Test
     public void createAndListCollectorTest() {
         String nombre = "A"+ UUID.randomUUID().toString();
 
-        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), isDisplayed()));
         collectorBtn.perform(click());
 
-        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), isDisplayed()));
         addAlbum.perform(click());
 
         ViewInteraction albumNombre = onView(withId(R.id.name));
@@ -99,12 +99,12 @@ public class ListAlbumTest {
         ViewInteraction description = onView(withId(R.id.description));
         description.perform(scrollTo(), replaceText("Los clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
 
-        ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit), withText("Agregar")));
+        ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit)));
         confirmBtn.perform(scrollTo(), click());
 
-        onView(withText("Aceptar")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
-        ViewInteraction atrasBtn = onView(allOf(withId(R.id.btnCancel), withText("Cancelar")));
+        ViewInteraction atrasBtn = onView(allOf(withId(R.id.btnCancel), withText(R.string.cancelar)));
         atrasBtn.perform(scrollTo(), click());
 
         ViewInteraction listarAlbumBtn = onView(allOf(withId(R.id.buttonGetAlbums), isDisplayed()));
@@ -134,10 +134,10 @@ public class ListAlbumTest {
     public void createAndListVisitorTest() {
         String nombre = "A"+ UUID.randomUUID().toString();
 
-        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), withText("Coleccionista"), isDisplayed()));
+        ViewInteraction collectorBtn = onView(allOf(withId(R.id.buttonCollector), isDisplayed()));
         collectorBtn.perform(click());
 
-        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), withText("Agregar Álbum"), isDisplayed()));
+        ViewInteraction addAlbum = onView(allOf(withId(R.id.btnAddAlbum), isDisplayed()));
         addAlbum.perform(click());
 
         ViewInteraction albumNombre = onView(withId(R.id.name));
@@ -158,12 +158,12 @@ public class ListAlbumTest {
         ViewInteraction description = onView(withId(R.id.description));
         description.perform(scrollTo(), replaceText("Los clasicazos pesados del Maestro Pastor Lopez"), closeSoftKeyboard());
 
-        ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit), withText("Agregar")));
+        ViewInteraction confirmBtn = onView(allOf(withId(R.id.btnSubmit)));
         confirmBtn.perform(scrollTo(), click());
 
-        onView(withText("Aceptar")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
-        ViewInteraction atrasBtn = onView(allOf(withId(R.id.btnCancel), withText("Cancelar")));
+        ViewInteraction atrasBtn = onView(allOf(withId(R.id.btnCancel), withText(R.string.cancelar)));
         atrasBtn.perform(scrollTo(), click());
 
         ViewInteraction navigateUpButton = Espresso.onView(ViewMatchers.withContentDescription("Navigate up"));

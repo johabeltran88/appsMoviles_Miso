@@ -14,6 +14,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.test.ui.MainActivity
 import com.example.test.ui.adapters.AlbumAdapter
 import org.hamcrest.Matchers
@@ -32,6 +33,7 @@ import org.junit.runner.RunWith
 class CreateAlbumCommentTest {
     @get:Rule
     val mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
+
     @Test
     fun addAlbumCommentCorrectlyTest() {
         //Main Activity - Click button collector
@@ -41,27 +43,31 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
-        onView(ViewMatchers.withText("El comentario ha sido agregado al albúm")).inRoot(RootMatchers.isDialog()).check(
+        onView(ViewMatchers.withText(R.string.addComment)).inRoot(RootMatchers.isDialog()).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -75,24 +81,29 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), click(), typeText(""))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
-        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+        onView(ViewMatchers.withText(R.string.error1)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -106,27 +117,31 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText(""))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+        onView(ViewMatchers.withText(R.string.error1)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -140,27 +155,31 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("test"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(ViewMatchers.withText("El campo debe ser un correo valido")).check(
+        onView(ViewMatchers.withText(R.string.error6)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -174,25 +193,29 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), click(), typeText(""))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
-        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+        onView(ViewMatchers.withText(R.string.error1)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -206,27 +229,31 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Uno")
+                ), Matchers.`is`(ratingsArray[1])
             )
         ).perform(click())
-
         onView(withId(R.id.description)).perform(scrollTo(), typeText(""))
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(ViewMatchers.withText("El campo es requerido y no debe estar vacio")).check(
+        onView(ViewMatchers.withText(R.string.error1)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }
@@ -240,26 +267,31 @@ class CreateAlbumCommentTest {
         //Collector Get firts album
         SystemClock.sleep(2000)
         onView(withId(R.id.recycler_view_albums))
-            .perform(RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1), RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click()))
+            .perform(
+                RecyclerViewActions.scrollToPosition<AlbumAdapter.AlbumViewHolder>(1),
+                RecyclerViewActions.actionOnItemAtPosition<AlbumAdapter.AlbumViewHolder>(1, click())
+            )
         SystemClock.sleep(2000)
         onView(withId(R.id.btnAddComment)).perform(scrollTo(), click())
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Collector 1"))
         onView(withId(R.id.email)).perform(scrollTo(), typeText("Collector1@test.com"))
         onView(withId(R.id.telephone)).perform(scrollTo(), typeText("3057100878"))
         onView(withId(R.id.rating)).perform(click())
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val ratingsArray: Array<String> = context.resources.getStringArray(R.array.rating)
         Espresso.onData(
             Matchers.allOf(
                 Matchers.`is`(
                     Matchers.instanceOf<Any>(
                         String::class.java
                     )
-                ), Matchers.`is`("Puntuación")
+                ), Matchers.`is`(ratingsArray[0])
             )
         ).perform(click())
-        onView(withId(R.id.description)).perform(scrollTo(), typeText(""))
+        onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(ViewMatchers.withText("Debe seleccionar un elemento de la lista")).check(
+        onView(ViewMatchers.withText(R.string.error5)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
     }

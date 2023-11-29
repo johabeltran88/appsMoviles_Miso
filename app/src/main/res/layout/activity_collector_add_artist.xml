@@ -147,7 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Listado de álbumes"
+                android:text="@string/listado_de_lbumes"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 

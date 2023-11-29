@@ -25,7 +25,7 @@ class CommentAdapter(var comments: List<Comment>) :
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder.comment.text =
-            comments[position].description.plus(" - Puntaje: ").plus(comments[position].rating)
+            comments[position].description.plus(" - ").plus(comments[position].rating)
     }
 
     fun updateAlbums(newComments: List<Comment>) {
