@@ -103,6 +103,8 @@ class CreateAlbumCommentTest {
             )
         ).perform(click())
         onView(withId(R.id.description)).perform(scrollTo(), typeText("Test"))
+        onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
+        onView(withId(R.id.name)).perform(scrollTo())
         onView(ViewMatchers.withText(R.string.error1)).check(
             ViewAssertions.matches(ViewMatchers.isDisplayed())
         )
