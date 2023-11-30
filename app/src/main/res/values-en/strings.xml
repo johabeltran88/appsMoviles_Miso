@@ -65,10 +65,10 @@
     <!-- Strings used for fragments for navigation -->
     <array name="rating">
         <item>Rating</item>
-        <item>Uno</item>
-        <item>Dos</item>
-        <item>Tres</item>
-        <item>Cuatro</item>
-        <item>Cinco</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
     </array>
 </resources>
