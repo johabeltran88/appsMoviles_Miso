@@ -13,7 +13,7 @@
     <string name="nombre">Name</string>
     <string name="imagen">Image</string>
     <string name="fecha_lanzamiento">Release date</string>
-    <string name="agregar_artista">Add Artis</string>
+    <string name="agregar_artista">Add Artist</string>
     <string name="fecha_nacimiento">Birthdate</string>
     <string name="fecha_nacimiento_2">Birthdate: </string>
     <string name="qu_quieres_hacer_hoy">What do you want to do today?</string>
@@ -65,10 +65,10 @@
     <!-- Strings used for fragments for navigation -->
     <array name="rating">
         <item>Rating</item>
-        <item>Uno</item>
-        <item>Dos</item>
-        <item>Tres</item>
-        <item>Cuatro</item>
-        <item>Cinco</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
     </array>
 </resources>
