@@ -1,51 +1,53 @@
 package com.example.test.common
 
+import android.content.Context
 import android.util.Patterns
 import java.text.SimpleDateFormat
 import java.util.Locale
+import com.example.test.R
 
-fun validateDate(field: String?): String {
+fun validateValue(field: String?, maxLength: Int, context: Context): String {
     if (field.isNullOrBlank())
-        return "El campo es requerido y no debe estar vacio"
-    if (!isDateValid(field))
-        return "El formato de la fecha ingresada debe ser mm/dd/aaaa"
-    return ""
-}
-
-fun validateSpinner(field: String?, placeHolder: String): String {
-    if (field.isNullOrBlank() || field == placeHolder)
-        return "Debe seleccionar un elemento de la lista"
-    return ""
-}
-
-fun validateValue(field: String?, maxLength: Int): String {
-    if (field.isNullOrBlank())
-        return "El campo es requerido y no debe estar vacio"
+        return context.getString(R.string.error1)
     if (field.length > maxLength)
-        return "El campo es de maximo de $maxLength caracteres"
+        return context.getString(R.string.error2, maxLength)
     return ""
 }
 
-fun validateEmailValue(field: String?): String {
+fun validateImage(field: String?, context: Context): String {
+    if (field.isNullOrBlank())
+        return context.getString(R.string.error1)
+    if (!isURLValid(field))
+        return context.getString(R.string.error4)
+    return ""
+}
+
+fun validateDate(field: String?, context: Context): String {
+    if (field.isNullOrBlank())
+        return context.getString(R.string.error1)
+    if (!isDateValid(field))
+        return context.getString(R.string.error3)
+    return ""
+}
+
+fun validateSpinner(field: String?, placeHolder: String, context: Context): String {
+    if (field.isNullOrBlank() || field == placeHolder)
+        return context.getString(R.string.error5)
+    return ""
+}
+
+fun validateEmail(field: String?, context: Context): String {
     if (field.isNullOrBlank()) {
-        return "El campo es requerido y no debe estar vacio"
+        return context.getString(R.string.error1)
     } else {
         // Expresión regular para validar un correo electrónico
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
 
         // Verificar si el campo coincide con la expresión regular
-        if(!emailRegex.matches(field))
-            return "El campo debe ser un correo valido"
+        if (!emailRegex.matches(field))
+            return context.getString(R.string.error6)
         return ""
     }
-}
-
-fun validateImage(field: String?): String {
-    if (field.isNullOrBlank())
-        return "La imagen es requerida y no debe estar vacia"
-    if (!isURLValid(field))
-        return "La url ingresada no es valida"
-    return ""
 }
 
 fun isURLValid(url: String?): Boolean {

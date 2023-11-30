@@ -2,7 +2,6 @@ package com.example.test
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.typeText
@@ -14,6 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.test.ui.MainActivity
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matchers
@@ -33,6 +33,7 @@ import org.junit.runner.RunWith
 class CreateArtistTest {
     @get:Rule
     val mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
+
     @Test
     fun addArtistCorrectlyTest() {
         //Main Activity - Click button collector
@@ -42,18 +43,29 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/10/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Collector Add Artist Activity - choose album
         onView(withId(R.id.albumes)).perform(scrollTo(), click())
-        Espresso.onData(Matchers.allOf(Matchers.`is`(Matchers.instanceOf<Any>(String::class.java)), Matchers.`is`("114-A"))).perform(click())
+        Espresso.onData(
+            Matchers.allOf(
+                Matchers.`is`(Matchers.instanceOf<Any>(String::class.java)),
+                Matchers.`is`("114-A")
+            )
+        ).perform(click())
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
-        onView(withText("El artista ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()))
+        onView(withText(R.string.addArtist)).inRoot(isDialog()).check(matches(isDisplayed()))
     }
 
     @Test
@@ -65,13 +77,23 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("23/23/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Check if alert
-        onView(withText("El formato de la fecha ingresada debe ser mm/dd/aaaa")).check(matches(isDisplayed()))
+        onView(withText(R.string.error3)).check(
+            matches(
+                isDisplayed()
+            )
+        )
     }
 
     @Test
@@ -87,9 +109,12 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/23/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Check if alert
-        onView(withText("La url ingresada no es valida")).check(matches(isDisplayed()))
+        onView(withText(R.string.error4)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -99,16 +124,28 @@ class CreateArtistTest {
         //Collector Home Activity - Click button add artist
         onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/23/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(not(isDisplayed())))
-            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
+        onView(withText(R.string.error1)).check(
+            matches(
+                not(
+                    isDisplayed()
+                )
+            )
+        )
+            .perform(scrollTo()).check(matches(isDisplayed()))
     }
 
     @Test
@@ -122,12 +159,21 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/23/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
-        onView(withText("La imagen es requerida y no debe estar vacia")).check(matches(not(isDisplayed())))
-            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
+        onView(withText(R.string.error1)).check(
+            matches(
+                not(
+                    isDisplayed()
+                )
+            )
+        )
+            .perform(scrollTo()).check(matches(isDisplayed()))
     }
 
     @Test
@@ -139,13 +185,19 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(isDisplayed()))
+        onView(withText(R.string.error1)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -157,14 +209,18 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/10/2023"))
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es requerido y no debe estar vacio")).check(matches(isDisplayed()))
+        onView(withText(R.string.error1)).check(matches(isDisplayed()))
     }
+
     @Test
     fun addArtistMaxNameCharactersTest() {
         //Main Activity - Click button collector
@@ -172,19 +228,30 @@ class CreateArtistTest {
         //Collector Home Activity - Click button add artist
         onView(withId(R.id.btnAddArtist)).perform(scrollTo(), click())
         //Collector Add Artist Activity - Type name in the form
-        onView(withId(R.id.name)).perform(scrollTo(), typeText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
+        onView(withId(R.id.name)).perform(
+            scrollTo(),
+            typeText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        )
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/10/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("Bod Marley was an important Jamaican singer"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("Bod Marley was an important Jamaican singer")
+        )
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es de maximo de 50 caracteres")).check(matches(not(isDisplayed())))
-            .perform(ViewActions.scrollTo()).check(matches(isDisplayed()))
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        onView(withText(context.getString(R.string.error2, 50))).check(matches(not(isDisplayed())))
+            .perform(scrollTo()).check(matches(isDisplayed()))
     }
+
     @Test
     fun addArtistMaxNameCharactersDescription() {
         //Main Activity - Click button collector
@@ -194,14 +261,21 @@ class CreateArtistTest {
         //Collector Add Artist Activity - Type name in the form
         onView(withId(R.id.name)).perform(scrollTo(), typeText("Bob Marley"))
         //Collector Add Artist Activity - Type image in the form
-        onView(withId(R.id.image)).perform(scrollTo(), typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1"))
+        onView(withId(R.id.image)).perform(
+            scrollTo(),
+            typeText("https://th.bing.com/th/id/OIP.Kq1MMaCkDoTJ3m9kx7GA9QHaKj?pid=ImgDet&rs=1")
+        )
         //Collector Add Artist Activity - Type birth date in the form
         onView(withId(R.id.birthDate)).perform(scrollTo(), typeText("05/10/2023"))
         //Collector Add Artist Activity - Type birth date in the form
-        onView(withId(R.id.description)).perform(scrollTo(), typeText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
+        onView(withId(R.id.description)).perform(
+            scrollTo(),
+            typeText("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        )
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if alert
-        onView(withText("El campo es de maximo de 500 caracteres")).check(matches(isDisplayed()))
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        onView(withText(context.getString(R.string.error2, 500))).check(matches(isDisplayed()))
     }
 }

@@ -1,10 +1,14 @@
 package com.example.test.ui
 
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.test.R
 import com.example.test.common.changeDateFormat
 import com.example.test.databinding.ActivityArtistDetailBinding
 import com.example.test.ui.adapters.AlbumAdapter
@@ -22,6 +26,10 @@ class ArtistDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
+        upArrow?.setColorFilter(resources.getColor(R.color.your_color), PorterDuff.Mode.SRC_ATOP)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         viewModel = ViewModelProvider(
             this, ArtistDetailViewModel.Factory(this.application)
