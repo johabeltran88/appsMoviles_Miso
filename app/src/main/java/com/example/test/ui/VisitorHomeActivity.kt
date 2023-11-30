@@ -1,9 +1,10 @@
 package com.example.test.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.test.databinding.ActivityVisitorHomeBinding
+
 
 class VisitorHomeActivity : AppCompatActivity() {
     private var _binding: ActivityVisitorHomeBinding? = null
@@ -14,6 +15,7 @@ class VisitorHomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnListArtist.setOnClickListener{

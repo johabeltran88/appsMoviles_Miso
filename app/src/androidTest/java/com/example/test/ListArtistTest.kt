@@ -45,7 +45,7 @@ class ListArtistTest {
             ViewActions.scrollTo(),
             click()
         )
-        onView(withText("Lista de Artistas")).check(
+        onView(withText(R.string.listado_de_artistas)).check(
             matches(isDisplayed())
         )
     }
@@ -81,7 +81,7 @@ class ListArtistTest {
             ViewActions.scrollTo(),
             click()
         )
-        onView(withText("Aceptar")).inRoot(RootMatchers.isDialog()).check(matches(isDisplayed()))
+        onView(withText(R.string.aceptar)).inRoot(RootMatchers.isDialog()).check(matches(isDisplayed()))
             .perform(
                 click()
             )
@@ -99,7 +99,7 @@ class ListArtistTest {
             click()
         )
         SystemClock.sleep(2000)
-        onView(withText("Lista de Artistas")).check(
+        onView(withText(R.string.listado_de_artistas)).check(
             matches(isDisplayed())
         )
         SystemClock.sleep(2000)
