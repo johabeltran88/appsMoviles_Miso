@@ -31,7 +31,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#03A9F4"
+                android:background="#01579B"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="#FEFEFE" />
@@ -66,7 +66,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorName}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -90,7 +90,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorImage}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -114,7 +114,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorBirthDate}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <EditText
@@ -139,7 +139,7 @@
                 android:layout_marginRight="20dp"
                 android:text="@={viewModel.errorDescription}"
                 android:textAlignment="center"
-                android:textColor="#F32121"
+                android:textColor="#D32F2F"
                 android:textSize="14sp" />
 
             <TextView
@@ -174,13 +174,12 @@
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:width="50dp"
-                    android:backgroundTint="#03A9F4"
+                    android:backgroundTint="#01579B"
                     android:maxWidth="50dp"
                     android:minWidth="50dp"
                     android:text="@string/agregar"
                     android:textColorHighlight="#2196F3"
-                    android:textColorLink="#03A9F4"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColorLink="#01579B" />
 
                 <Button
                     android:id="@+id/btnCancel"
@@ -191,13 +190,12 @@
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:width="30dp"
-                    android:backgroundTint="#FDF40303"
+                    android:backgroundTint="#D32F2F"
                     android:maxWidth="30dp"
                     android:minWidth="30dp"
                     android:text="@string/cancelar"
                     android:textColorHighlight="#F32121"
-                    android:textColorLink="#F40303"
-                    style="?android:attr/buttonBarButtonStyle" />
+                    android:textColorLink="#F40303" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

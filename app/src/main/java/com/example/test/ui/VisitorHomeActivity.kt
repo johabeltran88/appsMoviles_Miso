@@ -1,8 +1,12 @@
 package com.example.test.ui
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.test.R
 import com.example.test.databinding.ActivityVisitorHomeBinding
 
 
@@ -17,6 +21,10 @@ class VisitorHomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
+        upArrow?.setColorFilter(resources.getColor(R.color.your_color), PorterDuff.Mode.SRC_ATOP)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         binding.btnListArtist.setOnClickListener{
             startActivity(Intent(this, VisitorListArtistActivity::class.java))

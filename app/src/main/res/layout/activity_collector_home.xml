@@ -24,7 +24,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#03A9F4"
+                android:background="#01579B"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="#FEFEFE" />
@@ -52,11 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="#01579B"
                 android:minWidth="200dp"
                 android:text="@string/agregar_artista"
                 android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
+                android:textColorLink="#01579B" />
 
             <Button
                 android:id="@+id/btnAddAlbum"
@@ -64,11 +64,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="#01579B"
                 android:minWidth="200dp"
                 android:text="@string/agregar_lbum"
                 android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
+                android:textColorLink="#01579B" />
 
             <Button
                 android:id="@+id/buttonGetAlbums"
@@ -77,11 +77,11 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="#01579B"
                 android:minWidth="200dp"
                 android:text="@string/ver_lbumes"
                 android:textColorHighlight="#2196F3"
-                android:textColorLink="#03A9F4" />
+                android:textColorLink="#01579B" />
         </LinearLayout>
     </ScrollView>
 
