@@ -24,6 +24,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.example.test.ui.CollectorListAlbums
 import com.example.test.ui.MainActivity
+import com.example.test.ui.VisitorListAlbumsActivity
 import com.example.test.ui.adapters.AlbumAdapter.AlbumViewHolder
 import com.example.test.ui.adapters.CommentAdapter.CommentViewHolder
 import com.github.javafaker.Faker
@@ -37,24 +38,20 @@ import java.text.SimpleDateFormat
 @RunWith(AndroidJUnit4::class)
 class DetailAlbumTest {
 
-    companion object {
-        val GENRE: List<String> = listOf("Classical", "Salsa", "Rock", "Folk")
-        val RATING: List<String> = listOf("Uno", "Dos", "Tres", "Cuatro", "Cinco")
-        val RECORD_LABEL: List<String> =
-            listOf("Sony Music", "EMI", "Discos Fuentes", "Elektra", "Fania Records")
-    }
-
     @get:Rule
     val mainActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun detailAlbumAsVisitorAfterCreateAlbumSuccess() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val genres: Array<String> = context.resources.getStringArray(R.array.genre)
+        val recordsLabel: Array<String> = context.resources.getStringArray(R.array.recordLabel)
         val name = Faker().name().fullName()
         val image = Faker().internet().image()
         val format = SimpleDateFormat("MM/dd/yyy")
         val releaseDate = format.format(Faker().date().birthday())
-        val genre = GENRE[Faker().random().nextInt(0, 3)]
-        val recordLabel = RECORD_LABEL[Faker().random().nextInt(0, 4)]
+        val genre = genres[Faker().random().nextInt(1, 3)]
+        val recordLabel = recordsLabel[Faker().random().nextInt(1, 4)]
         val description = Faker().lorem().sentence(15)
 
         onView(withId(R.id.buttonCollector)).perform(
@@ -111,7 +108,7 @@ class DetailAlbumTest {
             scrollTo(),
             click()
         )
-        onView(withText("Aceptar")).inRoot(isDialog()).check(
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(
             matches(isDisplayed())
         )
             .perform(
@@ -131,11 +128,11 @@ class DetailAlbumTest {
             click()
         )
         sleep(2000)
-        onView(withText("Lista de Álbumes")).check(
+        onView(withText(R.string.listado_de_lbumes)).check(
             matches(isDisplayed())
         )
         sleep(2000)
-        val visitorListAlbumActivity = getCurrentActivity<CollectorListAlbums>()
+        val visitorListAlbumActivity = getCurrentActivity<VisitorListAlbumsActivity>()
         var position = 0
         for (album in visitorListAlbumActivity?.albumAdapter?.albums!!) {
             if (album.name == name) {
@@ -167,12 +164,15 @@ class DetailAlbumTest {
 
     @Test
     fun detailAlbumAsCollectorAfterCreateAlbumSuccess() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val genres: Array<String> = context.resources.getStringArray(R.array.genre)
+        val recordsLabel: Array<String> = context.resources.getStringArray(R.array.recordLabel)
         val name = Faker().name().fullName()
         val image = Faker().internet().image()
         val format = SimpleDateFormat("MM/dd/yyy")
         val releaseDate = format.format(Faker().date().birthday())
-        val genre = GENRE[Faker().random().nextInt(0, 3)]
-        val recordLabel = RECORD_LABEL[Faker().random().nextInt(0, 4)]
+        val genre = genres[Faker().random().nextInt(1, 3)]
+        val recordLabel = recordsLabel[Faker().random().nextInt(1, 4)]
         val description = Faker().lorem().sentence(15)
 
         onView(withId(R.id.buttonCollector)).perform(
@@ -229,7 +229,7 @@ class DetailAlbumTest {
             scrollTo(),
             click()
         )
-        onView(withText("Aceptar")).inRoot(isDialog()).check(
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(
             matches(isDisplayed())
         )
             .perform(
@@ -243,7 +243,7 @@ class DetailAlbumTest {
             click()
         )
         sleep(2000)
-        onView(withText("Lista de Álbumes")).check(
+        onView(withText(R.string.listado_de_lbumes)).check(
             matches(isDisplayed())
         )
         sleep(2000)
@@ -279,19 +279,23 @@ class DetailAlbumTest {
 
     @Test
     fun detailAlbumAsCollectorAfterCreateAlbumAndAddCommentSuccess() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val genres: Array<String> = context.resources.getStringArray(R.array.genre)
+        val ratings: Array<String> = context.resources.getStringArray(R.array.rating)
+        val recordsLabel: Array<String> = context.resources.getStringArray(R.array.recordLabel)
         val name = Faker().name().fullName()
         val image = Faker().internet().image()
         val format = SimpleDateFormat("MM/dd/yyy")
         val releaseDate = format.format(Faker().date().birthday())
-        val genre = GENRE[Faker().random().nextInt(0, 3)]
-        val recordLabel = RECORD_LABEL[Faker().random().nextInt(0, 4)]
+        val genre = genres[Faker().random().nextInt(1, 3)]
+        val recordLabel = recordsLabel[Faker().random().nextInt(1, 4)]
         val description = Faker().lorem().sentence(15)
 
         val collectorName = Faker().name().fullName()
         val collectorEmail = Faker().internet().emailAddress()
         var collectorTelephone = Faker().number().digits(7)
-        val ratingPos = Faker().random().nextInt(0, 4);
-        val rating = RATING[ratingPos]
+        val ratingPos = Faker().random().nextInt(1, 5);
+        val rating = ratings[ratingPos]
         val comment = Faker().lorem().sentence(15)
 
         onView(withId(R.id.buttonCollector)).perform(
@@ -348,7 +352,7 @@ class DetailAlbumTest {
             scrollTo(),
             click()
         )
-        onView(withText("Aceptar")).inRoot(isDialog()).check(
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(
             matches(isDisplayed())
         )
             .perform(
@@ -362,7 +366,7 @@ class DetailAlbumTest {
             click()
         )
         sleep(2000)
-        onView(withText("Lista de Álbumes")).check(
+        onView(withText(R.string.listado_de_lbumes)).check(
             matches(isDisplayed())
         )
         sleep(2000)
@@ -432,13 +436,13 @@ class DetailAlbumTest {
             click()
         )
         sleep(2000)
-        onView(withText("Aceptar")).inRoot(isDialog()).check(
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(
             matches(isDisplayed())
         ).perform(
             click()
         )
         sleep(2000)
-        onView(withText("$comment - Puntaje: " + (ratingPos + 1).toString())).check(
+        onView(withText("$comment - " + (ratingPos).toString())).check(
             matches(isDisplayed())
         )
     }

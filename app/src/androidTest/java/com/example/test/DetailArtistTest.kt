@@ -3,7 +3,6 @@ package com.example.test
 import android.app.Activity
 import android.os.SystemClock.sleep
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
@@ -22,10 +21,8 @@ import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
-import com.example.test.ui.CollectorListAlbums
 import com.example.test.ui.MainActivity
 import com.example.test.ui.VisitorListArtistActivity
-import com.example.test.ui.adapters.AlbumAdapter.AlbumViewHolder
 import com.example.test.ui.adapters.CommentAdapter.CommentViewHolder
 import com.github.javafaker.Faker
 import org.hamcrest.Matchers
@@ -37,13 +34,6 @@ import java.text.SimpleDateFormat
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class DetailArtistTest {
-
-    companion object {
-        val GENRE: List<String> = listOf("Classical", "Salsa", "Rock", "Folk")
-        val RATING: List<String> = listOf("Uno", "Dos", "Tres", "Cuatro", "Cinco")
-        val RECORD_LABEL: List<String> =
-            listOf("Sony Music", "EMI", "Discos Fuentes", "Elektra", "Fania Records")
-    }
 
     @get:Rule
     val mainActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
@@ -71,9 +61,9 @@ class DetailArtistTest {
         //Collector Add Artist Activity - Click button submit form
         onView(withId(R.id.btnSubmit)).perform(scrollTo(), click())
         //Check if dialog alert
-        onView(withText("El artista ha sido creado exitosamente")).inRoot(isDialog()).check(matches(isDisplayed()))
+        onView(withText(R.string.addArtist)).inRoot(isDialog()).check(matches(isDisplayed()))
 
-        onView(withText("Aceptar")).inRoot(isDialog()).check(
+        onView(withText(R.string.aceptar)).inRoot(isDialog()).check(
             matches(isDisplayed())
         )
             .perform(
@@ -93,7 +83,7 @@ class DetailArtistTest {
             click()
         )
         sleep(2000)
-        onView(withText("Lista de Artistas")).check(
+        onView(withText(R.string.listado_de_artistas)).check(
             matches(isDisplayed())
         )
         sleep(2000)

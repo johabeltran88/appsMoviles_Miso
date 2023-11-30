@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.test.R
+import com.example.test.common.validateEmail
 import com.example.test.common.validateSpinner
+import com.example.test.common.validateValue
 import com.example.test.databinding.ActivityAddCommentToAlbumBinding
 import com.example.test.viewmodel.AddCommentToAlbumViewModel
 
@@ -26,12 +28,6 @@ class AddCommentToAlbumActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityAddCommentToAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
-        upArrow?.setColorFilter(resources.getColor(R.color.your_color), PorterDuff.Mode.SRC_ATOP)
-        supportActionBar?.setHomeAsUpIndicator(upArrow)
 
         viewModel = ViewModelProvider(
             this, AddCommentToAlbumViewModel.Factory(this.application)
@@ -44,40 +40,59 @@ class AddCommentToAlbumActivity : AppCompatActivity() {
 
         viewModel.name.observe(this) {
             it.apply {
-                viewModel.validateName()
+                viewModel.errorName.postValue(
+                    validateValue(viewModel.name.value, 50, binding.root.context)
+                )
             }
         }
 
         binding.name.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateName()
+                viewModel.errorName.postValue(
+                    validateValue(viewModel.name.value, 50, binding.root.context)
+                )
         }
 
         viewModel.email.observe(this) {
             it.apply {
-                viewModel.validateEmail()
+                viewModel.errorEmail.postValue(
+                    validateEmail(viewModel.email.value, binding.root.context)
+                )
             }
         }
 
         binding.email.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateEmail()
+                viewModel.errorEmail.postValue(
+                    validateEmail(viewModel.email.value, binding.root.context)
+                )
         }
 
         viewModel.telephone.observe(this) {
             it.apply {
-                viewModel.validateTelephone()
+                viewModel.errorTelephone.postValue(
+                    validateValue(viewModel.telephone.value, 50, binding.root.context)
+                )
             }
         }
 
         binding.telephone.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateTelephone()
+                viewModel.errorTelephone.postValue(
+                    validateValue(viewModel.telephone.value, 50, binding.root.context)
+                )
         }
 
         viewModel.rating.observe(this) {
             it.apply {
-                viewModel.errorRating.value = validateSpinner(viewModel.rating.value, "Puntuación")
+                viewModel.errorRating.postValue(
+                    validateSpinner(
+                        viewModel.rating.value,
+                        getString(R.string.puntuacion),
+                        binding.root.context
+                    )
+                )
+
             }
         }
 
@@ -100,51 +115,83 @@ class AddCommentToAlbumActivity : AppCompatActivity() {
 
         viewModel.description.observe(this) {
             it.apply {
-                viewModel.validateDescription()
+                viewModel.errorDescription.postValue(
+                    validateValue(viewModel.description.value, 500, binding.root.context)
+                )
             }
         }
 
         binding.description.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateDescription()
+                viewModel.errorDescription.postValue(
+                    validateValue(viewModel.description.value, 500, binding.root.context)
+                )
         }
 
         binding.btnSubmit.setOnClickListener {
+            viewModel.errorName.postValue(
+                validateValue(
+                    viewModel.name.value,
+                    50,
+                    binding.root.context
+                )
+            )
+            viewModel.errorEmail.postValue(
+                validateEmail(viewModel.email.value, binding.root.context)
+            )
+            viewModel.errorTelephone.postValue(
+                validateValue(viewModel.telephone.value, 50, binding.root.context)
+            )
+            viewModel.errorRating.postValue(
+                validateSpinner(
+                    viewModel.rating.value,
+                    getString(R.string.puntuacion),
+                    binding.root.context
+                )
+            )
+            viewModel.errorDescription.postValue(
+                validateValue(viewModel.description.value, 500, binding.root.context)
+            )
             viewModel.addComment()
         }
 
         viewModel.errorName.observe(this) {
             it.apply {
+                viewModel.isValidName.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidName.postValue(false)
             }
         }
 
         viewModel.errorEmail.observe(this) {
             it.apply {
+                viewModel.isValidEmail.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidEmail.postValue(false)
             }
         }
 
         viewModel.errorTelephone.observe(this) {
             it.apply {
+                viewModel.isValidTelephone.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidTelephone.postValue(false)
             }
         }
 
         viewModel.errorRating.observe(this) {
             it.apply {
+                viewModel.isValidRating.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidRating.postValue(false)
             }
         }
 
         viewModel.errorDescription.observe(this) {
             it.apply {
+                viewModel.isValidDescription.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidDescription.postValue(false)
             }
         }
 
@@ -154,23 +201,23 @@ class AddCommentToAlbumActivity : AppCompatActivity() {
             it.apply {
                 if (it) {
                     val builder = AlertDialog.Builder(binding.root.context)
-                    builder.setTitle("Notificación")
-                    builder.setMessage("Ha ocurrido un error, intentelo de nuevo")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    builder.setTitle(R.string.notificacion)
+                    builder.setMessage(R.string.error)
+                    builder.setPositiveButton(R.string.aceptar) { dialog, _ ->
                         dialog.dismiss()
                     }
                     val dialog = builder.create()
                     dialog.show()
                     Toast.makeText(
                         binding.root.context,
-                        "Ha ocurrido un error, intentelo de nuevo mas tarde",
+                        R.string.error,
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
                     val builder = AlertDialog.Builder(binding.root.context)
-                    builder.setTitle("Notificación")
-                    builder.setMessage("El comentario ha sido agregado al albúm")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    builder.setTitle(R.string.notificacion)
+                    builder.setMessage(R.string.addComment)
+                    builder.setPositiveButton(R.string.aceptar) { dialog, _ ->
                         dialog.dismiss()
                         finish()
                     }

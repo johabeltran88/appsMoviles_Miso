@@ -6,9 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.test.common.validateEmailValue
-import com.example.test.common.validateSpinner
-import com.example.test.common.validateValue
 import com.example.test.database.VinylRoomDatabase
 import com.example.test.model.Collector
 import com.example.test.model.Comment
@@ -30,64 +27,34 @@ class AddCommentToAlbumViewModel(application: Application) : AndroidViewModel(ap
 
     var name = MutableLiveData<String>()
     var errorName = MutableLiveData<String>()
+    var isValidName = MutableLiveData<Boolean>()
 
     var email = MutableLiveData<String>()
     var errorEmail = MutableLiveData<String>()
+    var isValidEmail = MutableLiveData<Boolean>()
 
     var telephone = MutableLiveData<String>()
     var errorTelephone = MutableLiveData<String>()
+    var isValidTelephone = MutableLiveData<Boolean>()
 
     var rating = MutableLiveData<String>()
     var errorRating = MutableLiveData<String>()
+    var isValidRating = MutableLiveData<Boolean>()
 
     var description = MutableLiveData<String>()
     var errorDescription = MutableLiveData<String>()
+    var isValidDescription = MutableLiveData<Boolean>()
 
     var error = MutableLiveData<Boolean>()
-    var valid = MutableLiveData<Boolean>()
-
-    fun validateName() {
-        valid.value = true
-        errorName.value = validateValue(name.value, 50)
-    }
-
-    fun validateEmail() {
-        valid.value = true
-        errorEmail.value = validateEmailValue(email.value)
-    }
-
-    fun validateTelephone() {
-        valid.value = true
-        errorTelephone.value = validateValue(telephone.value, 50)
-    }
-
-    private fun validateRating() {
-        valid.value = true
-        errorRating.value = validateSpinner(rating.value, "Puntuación")
-    }
-
-    fun validateDescription() {
-        valid.value = true
-        errorDescription.value = validateValue(description.value, 500)
-    }
 
     fun addComment() {
-        if (valid.value == true) {
-            validateName()
-        }
-        if (valid.value == true) {
-            validateEmail()
-        }
-        if (valid.value == true) {
-            validateTelephone()
-        }
-        if (valid.value == true) {
-            validateRating()
-        }
-        if (valid.value == true) {
-            validateDescription()
-        }
-        if (valid.value == true) {
+        if (
+            isValidName.value == true
+            && isValidEmail.value == true
+            && isValidTelephone.value == true
+            && isValidRating.value == true
+            && isValidDescription.value == true
+        ) {
             val collector = Collector(
                 null,
                 name.value,

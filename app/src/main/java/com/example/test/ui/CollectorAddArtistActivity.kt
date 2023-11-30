@@ -8,20 +8,19 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.test.R
+import com.example.test.common.validateDate
+import com.example.test.common.validateImage
+import com.example.test.common.validateValue
 import com.example.test.databinding.ActivityCollectorAddArtistBinding
 import com.example.test.ui.adapters.AlbumAdapter
 import com.example.test.viewmodel.CollectorAddArtistViewModel
-import com.example.test.R
-import com.example.test.viewmodel.CollectorListAlbumViewModel
-import com.example.test.viewmodel.VisitorListAlbumViewModel
 
 class CollectorAddArtistActivity : AppCompatActivity(), OnItemClickListener {
 
@@ -51,17 +50,17 @@ class CollectorAddArtistActivity : AppCompatActivity(), OnItemClickListener {
         albumAdapter = AlbumAdapter(emptyList())
         val lisView: Spinner = findViewById(R.id.albumes)
 
-        viewModel.listaAlbumes.observe(this){
-                albums->
-                    val lista: ArrayList<String> = ArrayList()
-                    for(i in albums)
-                    {
-                        lista.add(i.id!!.toString() + "-" + i.name.toString())
-                    }
-                    var arrayAdapter: ArrayAdapter<String> = ArrayAdapter(applicationContext,
-                    android.R.layout.simple_selectable_list_item,
-                    lista)
-                    lisView.adapter = arrayAdapter
+        viewModel.listaAlbumes.observe(this) { albums ->
+            val lista: ArrayList<String> = ArrayList()
+            for (i in albums) {
+                lista.add(i.id!!.toString() + "-" + i.name.toString())
+            }
+            var arrayAdapter: ArrayAdapter<String> = ArrayAdapter(
+                applicationContext,
+                android.R.layout.simple_selectable_list_item,
+                lista
+            )
+            lisView.adapter = arrayAdapter
         }
 
         binding.albumes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -71,7 +70,8 @@ class CollectorAddArtistActivity : AppCompatActivity(), OnItemClickListener {
                 position: Int,
                 id: Long
             ) {
-                viewModel.albumPosition.value = binding.albumes.selectedItemPosition.toString().toInt()
+                viewModel.albumPosition.value =
+                    binding.albumes.selectedItemPosition.toString().toInt()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -81,77 +81,113 @@ class CollectorAddArtistActivity : AppCompatActivity(), OnItemClickListener {
 
         viewModel.name.observe(this) {
             it.apply {
-                viewModel.validateName()
+                viewModel.errorName.postValue(
+                    validateValue(viewModel.name.value, 50, binding.root.context)
+                )
             }
         }
 
         binding.name.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateName()
+                viewModel.errorName.postValue(
+                    validateValue(viewModel.name.value, 50, binding.root.context)
+                )
         }
 
         viewModel.image.observe(this) {
             it.apply {
-                viewModel.validateImage()
+                viewModel.errorImage.postValue(
+                    validateImage(viewModel.image.value, binding.root.context)
+                )
             }
         }
 
         binding.image.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateImage()
-        }
-
-        viewModel.description.observe(this) {
-            it.apply {
-                viewModel.validateDescription()
-            }
-        }
-
-        binding.description.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus)
-                viewModel.validateDescription()
+                viewModel.errorImage.postValue(
+                    validateImage(viewModel.image.value, binding.root.context)
+                )
         }
 
         viewModel.birthDate.observe(this) {
             it.apply {
-                viewModel.validateBirthDate()
+                viewModel.errorBirthDate.postValue(
+                    validateDate(viewModel.birthDate.value, binding.root.context)
+                )
             }
         }
 
         binding.birthDate.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus)
-                viewModel.validateBirthDate()
+                viewModel.errorBirthDate.postValue(
+                    validateDate(viewModel.birthDate.value, binding.root.context)
+                )
+        }
+
+        viewModel.description.observe(this) {
+            it.apply {
+                viewModel.errorDescription.postValue(
+                    validateValue(viewModel.description.value, 500, binding.root.context)
+                )
+            }
+        }
+
+        binding.description.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus)
+                viewModel.errorDescription.postValue(
+                    validateValue(viewModel.description.value, 500, binding.root.context)
+                )
         }
 
         binding.btnSubmit.setOnClickListener {
+            viewModel.errorName.postValue(
+                validateValue(
+                    viewModel.name.value,
+                    50,
+                    binding.root.context
+                )
+            )
+            viewModel.errorImage.postValue(
+                validateImage(viewModel.image.value, binding.root.context)
+            )
+            viewModel.errorBirthDate.postValue(
+                validateDate(viewModel.birthDate.value, binding.root.context)
+            )
+            viewModel.errorDescription.postValue(
+                validateValue(viewModel.description.value, 500, binding.root.context)
+            )
             viewModel.addArtist()
         }
 
         viewModel.errorName.observe(this) {
             it.apply {
+                viewModel.isValidName.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidName.postValue(false)
             }
         }
 
         viewModel.errorImage.observe(this) {
             it.apply {
+                viewModel.isValidImage.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidImage.postValue(false)
             }
         }
 
         viewModel.errorBirthDate.observe(this) {
             it.apply {
+                viewModel.isValidBirthDate.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidBirthDate.postValue(false)
             }
         }
 
         viewModel.errorDescription.observe(this) {
             it.apply {
+                viewModel.isValidDescription.postValue(true)
                 if (!it.equals(""))
-                    viewModel.valid.value = false
+                    viewModel.isValidDescription.postValue(false)
             }
         }
 
@@ -159,23 +195,23 @@ class CollectorAddArtistActivity : AppCompatActivity(), OnItemClickListener {
             it.apply {
                 if (it) {
                     val builder = AlertDialog.Builder(binding.root.context)
-                    builder.setTitle("Notificación")
-                    builder.setMessage("Ha ocurrido un error, intentelo de nuevo")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    builder.setTitle(R.string.notificacion)
+                    builder.setMessage(R.string.error)
+                    builder.setPositiveButton(R.string.aceptar) { dialog, _ ->
                         dialog.dismiss()
                     }
                     val dialog = builder.create()
                     dialog.show()
                     Toast.makeText(
                         binding.root.context,
-                        "Ha ocurrido un error, intentelo de nuevo mas tarde",
+                        R.string.error,
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
                     val builder = AlertDialog.Builder(binding.root.context)
-                    builder.setTitle("Notificación")
-                    builder.setMessage("El artista ha sido creado exitosamente")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    builder.setTitle(R.string.notificacion)
+                    builder.setMessage(R.string.addArtist)
+                    builder.setPositiveButton(R.string.aceptar) { dialog, _ ->
                         dialog.dismiss()
                         val intent =
                             Intent(binding.root.context, CollectorAddArtistActivity::class.java)
