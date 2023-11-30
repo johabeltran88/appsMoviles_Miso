@@ -5,7 +5,6 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.example.test.R
 import com.example.test.databinding.ActivityVisitorHomeBinding
